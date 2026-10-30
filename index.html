@@ -4,149 +4,139 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>김정현 포트폴리오</title>
-<meta name="description" content="이터널 리턴 전적 사이트 ERCraft를 혼자 만들고 운영하는 김정현의 개발 포트폴리오">
+<meta name="description" content="이터널 리턴 전적 사이트 ERCraft를 만들어 운영하는 김정현의 개발 포트폴리오">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-  :root { --bg:#ffffff; --ink:#16181d; --sub:#5b616e; --faint:#8a909c; --line:#e4e6eb; --soft:#f4f5f7; --accent:#0f6b73; }
+  /* 패치 노트처럼 읽히는 한 단 구성: 실제 화면 → 바뀐 숫자(이전 값에 취소선) → 짧은 설명 */
+  :root {
+    --paper:#ffffff; --ink:#14161b; --body:#2b2f37; --muted:#666c78; --rule:#e3e5ea; --old:#a4a9b3; --accent:#c42a52;
+    --display:"Gothic A1","Noto Sans KR","Malgun Gothic",sans-serif;
+    --text:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    --mono:"JetBrains Mono",Consolas,"Malgun Gothic",monospace;
+    color-scheme:light;
+  }
   * { box-sizing:border-box; }
   html { -webkit-text-size-adjust:100%; }
-  body { margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans KR","Pretendard","Malgun Gothic",sans-serif; font-size:16px; line-height:1.7; word-break:keep-all; overflow-wrap:break-word; }
-  a { color:var(--accent); text-decoration:none; }
-  a:hover { text-decoration:underline; }
+  body { margin:0; background:var(--paper); color:var(--body); font-family:var(--text); font-size:16px; line-height:1.75; word-break:keep-all; overflow-wrap:break-word; }
+  a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--rule); text-underline-offset:3px; text-decoration-thickness:2px; }
+  a:hover { text-decoration-color:var(--accent); }
+  a:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   img { max-width:100%; height:auto; display:block; }
-  .wrap { max-width:860px; margin:0 auto; padding:0 24px; }
-  nav { border-bottom:1px solid var(--line); }
-  nav .wrap { display:flex; justify-content:space-between; align-items:center; height:56px; }
-  nav b { font-weight:600; }
-  nav .links { display:flex; gap:20px; font-size:14px; }
-  nav .links a { color:var(--sub); }
+  .page { max-width:820px; margin:0 auto; padding-block:56px 72px; padding-left:max(20px, env(safe-area-inset-left, 0px)); padding-right:max(20px, env(safe-area-inset-right, 0px)); }
 
-  header { padding:64px 0 32px; }
-  .eyebrow { color:var(--sub); font-size:15px; margin:0 0 12px; }
-  h1 { font-size:40px; line-height:1.3; letter-spacing:-1px; margin:0 0 20px; font-weight:700; }
-  .lead { font-size:18px; color:#30343c; margin:0 0 20px; max-width:640px; }
-  .contact { display:flex; flex-wrap:wrap; gap:6px 20px; font-size:15px; }
-  .contact span { color:var(--sub); }
-  .shot { margin:36px 0 0; }
-  .shot img { border:1px solid var(--line); border-radius:10px; }
-  figcaption { color:var(--faint); font-size:13px; margin-top:8px; }
+  .who { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; font-size:14px; color:var(--muted); }
+  .who b { color:var(--ink); font-family:var(--text); font-size:15px; }
+  .who .links { display:flex; flex-wrap:wrap; gap:4px 16px; }
+  h1 { font-family:var(--display); font-weight:800; color:var(--ink); font-size:clamp(30px, 5.2vw, 46px); line-height:1.25; letter-spacing:-0.03em; margin:40px 0 16px; text-wrap:balance; }
+  .lead { font-size:17px; max-width:36em; margin:0; }
+  .hero-shot { margin:36px 0 0; }
+  .hero-shot img { border:1px solid var(--ink); }
+  .users { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; margin-top:14px; }
+  .users b { font-family:var(--mono); font-weight:600; font-size:20px; color:var(--ink); }
+  .users span { font-size:14px; color:var(--muted); }
 
-  .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:40px 0 0; }
-  .stats div { padding:18px 0 18px 20px; border-left:1px solid var(--line); }
-  .stats div:first-child { border-left:0; padding-left:0; }
-  .stats b { display:block; font-size:28px; font-weight:700; letter-spacing:-0.5px; line-height:1.3; }
-  .stats span { color:var(--sub); font-size:14px; }
+  h2 { font-family:var(--display); font-weight:800; color:var(--ink); font-size:22px; letter-spacing:-0.02em; margin:0; }
+  .block { margin-top:88px; }
+  .block > h2 { padding-bottom:12px; border-bottom:2px solid var(--ink); }
 
-  section { padding:72px 0 0; }
-  h2 { font-size:26px; letter-spacing:-0.5px; margin:0 0 8px; }
-  .sec-sub { color:var(--sub); margin:0 0 8px; }
+  .case { padding:40px 0 8px; }
+  .case + .case { border-top:1px solid var(--rule); }
+  .delta { font-family:var(--mono); font-weight:600; font-size:clamp(28px, 5vw, 40px); line-height:1.2; color:var(--ink); display:flex; flex-wrap:wrap; align-items:baseline; gap:0 14px; }
+  .delta s { color:var(--old); font-weight:400; text-decoration-thickness:2px; }
+  .delta .to { color:var(--old); font-weight:400; }
+  .delta b { color:var(--accent); font-weight:600; }
+  .delta-note { font-size:14px; color:var(--muted); margin:6px 0 0; }
+  .case h3 { font-family:var(--display); font-weight:700; color:var(--ink); font-size:20px; line-height:1.45; letter-spacing:-0.02em; margin:22px 0 4px; text-wrap:balance; }
+  .meta { font-size:13.5px; color:var(--muted); margin:0 0 14px; }
+  .case p:not(.meta):not(.delta-note) { margin:0 0 12px; max-width:40em; }
+  figure { margin:20px 0 0; }
+  figure img { border:1px solid var(--rule); }
+  figcaption { font-size:13px; color:var(--muted); margin-top:6px; }
 
-  .case { padding:44px 0 0; }
-  .case + .case { margin-top:44px; border-top:1px solid var(--line); }
-  .case .meta { color:var(--faint); font-size:14px; margin:0 0 6px; }
-  .case h3 { font-size:23px; line-height:1.4; letter-spacing:-0.4px; margin:0 0 18px; }
-  .big { display:inline-block; background:var(--soft); border-radius:8px; padding:10px 18px; margin:0 0 20px; }
-  .big b { font-size:26px; letter-spacing:-0.5px; }
-  .big span { display:block; color:var(--sub); font-size:13px; }
-  .case p { margin:0 0 14px; }
-  .case figure { margin:24px 0 0; }
+  .log { list-style:none; padding:0; margin:0; }
+  .log li { display:grid; grid-template-columns:15.5em 1fr; gap:4px 24px; padding:18px 0; border-bottom:1px solid var(--rule); }
+  .log li > * { min-width:0; }
+  .log b { font-family:var(--display); font-weight:700; color:var(--ink); line-height:1.5; }
+  .log span { max-width:40em; }
+  .stack { font-size:13.5px; color:var(--muted); margin:16px 0 0; line-height:1.7; }
 
-  ul.plain { list-style:none; padding:0; margin:20px 0 0; }
-  ul.plain li { padding:16px 0; border-top:1px solid var(--line); }
-  ul.plain li:last-child { border-bottom:1px solid var(--line); }
-  ul.plain b { display:block; font-weight:600; }
-  ul.plain span { color:#30343c; }
-  .stack { color:var(--sub); font-size:14px; margin-top:16px; }
+  .intro-ai { margin:20px 0 4px; max-width:40em; }
 
-  .work { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
-  .card { border:1px solid var(--line); border-radius:10px; padding:20px; }
-  .card h4 { margin:0 0 4px; font-size:17px; }
-  .card .m { color:var(--faint); font-size:13px; margin:0 0 8px; }
-  .card p { margin:0; font-size:15px; color:#30343c; }
-  .card.wide { grid-column:1 / -1; display:grid; grid-template-columns:1fr 200px; gap:20px; align-items:start; }
-  .card.wide img { border:1px solid var(--line); border-radius:8px; }
+  .work { list-style:none; padding:0; margin:0; }
+  .work li { padding:18px 0; border-bottom:1px solid var(--rule); }
+  .work .t { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 14px; }
+  .work .t b { font-family:var(--display); font-weight:700; color:var(--ink); font-size:17px; }
+  .work .t span { font-size:13.5px; color:var(--muted); }
+  .work p { margin:6px 0 0; max-width:40em; }
 
-  footer { padding:72px 0 64px; }
-  footer .note { color:var(--faint); font-size:13px; margin-top:24px; }
+  footer { margin-top:88px; padding-top:20px; border-top:2px solid var(--ink); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 24px; }
+  footer .c { display:flex; flex-wrap:wrap; gap:4px 18px; font-size:14px; }
+  footer .note { flex-basis:100%; font-size:13px; color:var(--muted); margin:8px 0 0; }
 
   @media (max-width:640px) {
-    .wrap { padding:0 16px; }
-    nav .links { display:none; }
-    header { padding:40px 0 24px; }
-    h1 { font-size:29px; }
+    .page { padding-block:32px 56px; }
     .lead { font-size:16px; }
-    .stats { grid-template-columns:1fr; }
-    .stats div { border-left:0; padding:14px 0; border-top:1px solid var(--line); }
-    .stats div:first-child { border-top:0; }
-    .case h3 { font-size:20px; }
-    .work, .card.wide { grid-template-columns:1fr; }
+    .block { margin-top:64px; }
+    .log li { grid-template-columns:1fr; }
   }
   @media print {
-    nav { display:none; }
-    header { padding-top:8px; }
-    section { padding-top:36px; }
-    .case, figure, .card, ul.plain li, .keep { break-inside:avoid; }
-    h2, h3, .sec-head { break-after:avoid; }
-    section { padding-top:28px; }
-    footer { padding:28px 0 0; }
-    #ercraft figure img { width:72%; }
-    .case figure img { width:88%; }
+    .page { padding-block:0; }
+    .block { margin-top:40px; }
+    footer { margin-top:40px; }
+    .case, figure, .log li, .work li { break-inside:avoid; }
+    h2, h3, .delta, .delta-note { break-after:avoid; }
+    .case figure img { width:86%; }
+    #ercraft figure img { width:70%; }
   }
 </style>
 </head>
 <body>
-<nav>
-  <div class="wrap">
-    <b>김정현</b>
-    <div class="links"><a href="#cases">사례</a><a href="#ercraft">ERCraft 운영</a><a href="#ai">AI로 일하는 방식</a><a href="#work">다른 작업</a></div>
-  </div>
-</nav>
+<div class="page">
 
-<div class="wrap">
 <header>
-  <p class="eyebrow">김정현 · 웹 서비스 개발</p>
+  <div class="who">
+    <b>김정현</b>
+    <div class="links">
+      <a href="https://ercraft.net">ercraft.net</a>
+      <a href="https://github.com/adgjmptw2">github.com/adgjmptw2</a>
+      <span>rlawjdgus2900@gmail.com</span>
+    </div>
+  </div>
   <h1>이터널 리턴 전적 사이트<br>ERCraft를 만들어 운영합니다</h1>
   <p class="lead">2026년 7월에 연 개인 프로젝트입니다. 기획부터 화면, 서버, DB, 배포까지 직접 맡고 있고, 코드는 Claude Code와 Codex로 씁니다.</p>
-  <div class="contact">
-    <a href="https://ercraft.net">ercraft.net</a>
-    <a href="https://github.com/adgjmptw2">github.com/adgjmptw2</a>
-    <span>rlawjdgus2900@gmail.com</span>
-  </div>
-  <figure class="shot">
+  <figure class="hero-shot">
     <img src="img/er-home.jpg" alt="ERCraft 첫 화면" width="1600" height="933">
-    <figcaption>ERCraft 첫 화면</figcaption>
   </figure>
-  <div class="stats">
-    <div><b>약 7,600명</b><span>최근 7일 활성 사용자 · GA4, 2026.10.20–26</span></div>
-    <div><b>2026.07 ~</b><span>오픈 후 계속 운영 중</span></div>
-  </div>
+  <div class="users"><b>약 7,600명</b><span>최근 7일 활성 사용자 · GA4, 2026.10.20–26 · 2026년 7월 오픈 후 계속 운영 중</span></div>
 </header>
 
-<section id="cases">
-  <h2 class="sec-head">사례</h2>
+<section class="block" id="cases">
+  <h2>사례</h2>
 
   <article class="case">
-    <p class="meta">ERCraft · 2026.10 · 사용자 문의 대응</p>
+    <div class="delta"><s>3명</s><span class="to">→</span><b>24명</b></div>
+    <p class="delta-note">문의한 경기에 저장된 플레이어 기록</p>
     <h3>"팀원 기록이 없다"는 문의를 받고 경기 기록을 다시 받아 왔습니다</h3>
-    <div class="big"><b>3명 → 24명</b><span>문의한 경기에 저장된 플레이어 기록</span></div>
+    <p class="meta">ERCraft · 2026.10 · 사용자 문의 대응</p>
     <p>팀원 기록이 "공식 기록 없음"으로 뜬다는 문의를 받고 확인해 보니, 24명이 있어야 할 경기 기록에 3명만 남아 있었습니다.</p>
     <p>경기가 끝나기 전에 받아 둔 상세 기록이 완성본으로 저장돼 있었습니다. 받은 지 24시간이 안 됐는데 1등 기록이 없는 경기는, 전적을 갱신할 때 다시 받도록 고쳤습니다.</p>
     <p>배포 후 문의한 사용자의 경기 6개가 복구되고 팀원 기록도 정상으로 뜨는 것을 확인했습니다. 7일이 지나 원본을 다시 받을 수 없는 경기는 "기록 부족"으로 따로 표시합니다.</p>
   </article>
 
   <article class="case">
+    <div class="delta"><s>5.3초</s><span class="to">→</span><b>1.75초</b></div>
+    <p class="delta-note">첫 검색 대기 시간 · 그중 플레이어 확인 단계 4,077ms → 205ms</p>
+    <h3>첫 검색 대기 시간을 줄였습니다</h3>
     <p class="meta">ERCraft · 2026.10 · Node.js, Fastify, 공식 게임 API</p>
-    <h3>첫 검색 대기 시간을 5.3초에서 1.75초로 줄였습니다</h3>
-    <div class="big"><b>5.3초 → 1.75초</b><span>첫 검색 대기 · 그중 플레이어 확인 단계 4,077ms → 205ms</span></div>
     <p>운영자용 진단 화면에서 첫 검색의 단계별 처리 시간을 보니, 플레이어 확인 단계 하나가 4초를 쓰고 있었습니다. 저장된 기록이 지금 검색한 플레이어의 것인지 확인하려고 공식 경기 목록에서 최근 경기 3개를 찾는 단계입니다.</p>
     <p>코드가 이 목록을 매번 맨 앞부터 넘기고 있었습니다. 공식 API가 다음 페이지를 경기 번호로 넘겨준다는 걸 실제 응답으로 확인하고, 저장된 가장 최근 경기 다음부터 찾게 바꿨습니다. 찾지 못하면 기존처럼 처음부터 다시 조회합니다.</p>
   </article>
 
   <article class="case">
+    <h3 style="margin-top:0">AI가 게임을 끝까지 플레이하는 테스트 도구를 만들었습니다</h3>
     <p class="meta">루미아 덱(덱빌딩 게임) · 2026.10 · TypeScript, Phaser, LLM API</p>
-    <h3>AI가 게임을 끝까지 플레이하는 테스트 도구를 만들었습니다</h3>
     <p>덱빌딩 게임을 만들면서 밸런스를 고칠 때마다 사람이 여러 판을 해 볼 수는 없었습니다. 목표는 "처음 하는 사람은 1막 후반, 해 본 사람은 3막에서 막힌다"였습니다.</p>
     <p>AI 모델이 실제 게임 엔진에서 한 판을 끝까지 플레이하게 했습니다. 매 턴 상황을 넘기면 모델이 낼 카드와 대상을 JSON으로 답하고, 규칙에 어긋난 행동은 막고 횟수만 기록합니다. 여러 판을 동시에 돌리고 끝난 판은 바로 저장해서, 중간에 끊겨도 남은 판만 다시 돌립니다. 10월 19일 하루에 모델 3개로 21차까지 돌렸습니다.</p>
     <p>AI 점수를 올리려고 난이도를 낮췄다가, 직접 해 본 첫 판에 3막까지 쉽게 깼습니다. 너무 쉬워졌다고 보고 낮춘 부분 일부를 되돌렸습니다.</p>
@@ -157,9 +147,9 @@
   </article>
 </section>
 
-<section id="ercraft">
-  <h2 class="sec-head">ERCraft를 운영하며 한 일</h2>
-  <ul class="plain">
+<section class="block" id="ercraft">
+  <h2>ERCraft를 운영하며 한 일</h2>
+  <ul class="log">
     <li><b>전적 삭제 요청을 받고 다음 날 노출 차단</b><span>10월 26일 "내 전적을 지워 달라"는 요청을 받았습니다. 다음 날 검색, 프로필, API, AI 분석에서 그 계정이 보이지 않게 막는 기능을 배포했고, API 4개 경로와 화면에서 직접 확인했습니다. DB에 저장된 전적은 지우지 않았습니다.</span></li>
     <li><b>개발사와 리플레이 파일 사용 조건 조율</b><span>게임사 개발자와 리플레이 파일을 분석에 쓰는 조건을 맞췄습니다. 원본 파일은 분석 후 지우고, 삭제 요청 수단을 두고, 비공식 사이트라고 표시합니다.</span></li>
     <li><b>가장 큰 테이블 38.95GB → 16.3GB</b><span>서비스를 내리지 않고 압축했습니다. 압축 전후로 같은 표본 2,000행의 해시를 비교해 내용이 같은지 확인했습니다.</span></li>
@@ -167,60 +157,54 @@
     <li><b>AI 분석 문장의 숫자 검사</b><span>LLM이 쓴 플레이 분석 문장의 수치를 원본 데이터와 자동으로 대조합니다. 불일치가 잡힌 문장은 화면에 내보내지 않습니다.</span></li>
   </ul>
   <figure>
-    <img src="img/er-ai.jpg" alt="ERCraft AI 분석 화면" width="1265" height="712" loading="lazy" style="margin-top:28px;border:1px solid var(--line);border-radius:10px">
+    <img src="img/er-ai.jpg" alt="ERCraft AI 분석 화면" width="1265" height="712" loading="lazy">
     <figcaption>AI 분석 화면</figcaption>
   </figure>
-  <p class="stack">React 19, TypeScript, Vite · Node.js(Fastify), Prisma, MySQL 8, Python · Cloudflare Pages·Tunnel, Windows 서버<br>30일 요청 2,455만 건(Cloudflare, 캐시 포함, 9.27–10.27)</p>
+  <p class="stack">React 19 · TypeScript · Vite · Node.js(Fastify) · Prisma · MySQL 8 · Python · Cloudflare Pages/Tunnel · Windows 서버<br>30일 요청 2,455만 건(Cloudflare, 캐시 포함, 9.27–10.27)</p>
 </section>
 
-<section id="ai">
-  <h2 class="sec-head">AI로 일하는 방식</h2>
-  <p>Claude Code와 Codex로 코드를 씁니다. 무엇을 만들지 정하고, 바뀐 코드와 실제 화면을 확인한 뒤 배포합니다.</p>
-  <ul class="plain">
+<section class="block" id="ai">
+  <h2>AI로 일하는 방식</h2>
+  <p class="intro-ai">Claude Code와 Codex로 코드를 씁니다. 무엇을 만들지 정하고, 바뀐 코드와 실제 화면을 확인한 뒤 배포합니다.</p>
+  <ul class="log">
     <li><b>배포 전 테스트 확인</b><span>배포 전에 전체 테스트를 돌려 기존 실패 목록과 비교하고, 새로 깨진 테스트가 없을 때만 배포합니다. 배포할 때 Git 훅이 테스트 기록을 확인해, 기록이 없거나 30분이 지났으면 진행을 막습니다.</span></li>
     <li><b>AI 코드는 바뀐 범위부터 확인</b><span>요청하지 않은 곳까지 같이 바뀌는 일이 잦아서 diff에서 그 부분을 먼저 봅니다. 중요한 변경은 코드를 쓴 모델과 다른 모델에게 한 번 더 검토를 맡깁니다.</span></li>
     <li><b>받지 않은 제안</b><span>다국어 AI 분석을 처음부터 외국어로 만들자는 제안이 있었습니다. 그러면 한국어 기준으로 만든 숫자·근거 검사를 건너뛰게 됩니다. 그래서 한국어로 먼저 만들어 검사를 통과시킨 뒤 번역하게 했습니다.</span></li>
   </ul>
 </section>
 
-<section id="work">
-  <h2 class="sec-head">다른 작업</h2>
-  <div class="work">
-    <div class="card wide">
-      <div>
-        <h4>카톡 AI 원격 비서</h4>
-        <p class="m">Python · 2026.10 · <a href="https://github.com/adgjmptw2/kakao-ai-agent">GitHub</a> 공개(MIT)</p>
-        <p>카톡 '나와의 채팅'으로 집 PC의 Claude Code, Codex, Gemini에 일을 시키고 결과를 받습니다. 내 계정이 보낸 '/' 명령만 받고, 기본은 읽기 모드입니다. 팀 모드에서는 계획, 실행, 검토를 서로 다른 AI가 맡고, 파일은 실행 담당만 고칩니다.</p>
-      </div>
-      <img src="img/kakao-team.jpg" alt="카톡 비서 팀 모드 화면" width="672" height="906" loading="lazy">
-    </div>
-    <div class="card">
-      <h4>좀보이드 스토리 자동 진행 애드온</h4>
-      <p class="m">Lua · Steam 창작마당 구독 641 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></p>
+<section class="block" id="work">
+  <h2>다른 작업</h2>
+  <ul class="work">
+    <li>
+      <div class="t"><b>카톡 AI 원격 비서</b><span>Python · 2026.10 · <a href="https://github.com/adgjmptw2/kakao-ai-agent">GitHub</a> 공개(MIT)</span></div>
+      <p>카톡 '나와의 채팅'으로 집 PC의 Claude Code, Codex, Gemini에 일을 시키고 결과를 받습니다. 내 계정이 보낸 '/' 명령만 받고, 기본은 읽기 모드입니다. 팀 모드에서는 계획, 실행, 검토를 서로 다른 AI가 맡고, 파일은 실행 담당만 고칩니다.</p>
+    </li>
+    <li>
+      <div class="t"><b>좀보이드 스토리 자동 진행 애드온</b><span>Lua · Steam 창작마당 구독 641 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></span></div>
       <p>관리자가 손으로 넘기던 스토리 진행을 서버에서 자동으로 돌게 했습니다.</p>
-    </div>
-    <div class="card">
-      <h4>리썰 컴퍼니 모드 14개</h4>
-      <p class="m">C# · 14개 합계 다운로드 95,961 · <a href="https://thunderstore.io/c/lethal-company/p/MINE9289/">Thunderstore</a></p>
+    </li>
+    <li>
+      <div class="t"><b>리썰 컴퍼니 모드 14개</b><span>C# · 14개 합계 다운로드 95,961 · <a href="https://thunderstore.io/c/lethal-company/p/MINE9289/">Thunderstore</a></span></div>
       <p>Unity 게임 리썰 컴퍼니용 한국어 번역 패치, 기존 모드를 고친 버전, 직접 만든 모드를 올렸습니다.</p>
-    </div>
-    <div class="card">
-      <h4>디스코드 봇</h4>
-      <p class="m">TypeScript · GitHub ★69 · <a href="https://github.com/adgjmptw2/MINE-Discord-Bot">GitHub</a></p>
+    </li>
+    <li>
+      <div class="t"><b>디스코드 봇</b><span>TypeScript · GitHub ★69 · <a href="https://github.com/adgjmptw2/MINE-Discord-Bot">GitHub</a></span></div>
       <p>음악 재생, 서버 코인, 모의투자 기능이 있는 개인 서버용 봇입니다.</p>
-    </div>
-  </div>
+    </li>
+  </ul>
 </section>
 
 <footer>
-  <h2>연락</h2>
-  <div class="contact">
+  <b style="font-family:var(--display);color:var(--ink)">김정현</b>
+  <div class="c">
     <span>rlawjdgus2900@gmail.com</span>
     <a href="https://github.com/adgjmptw2">github.com/adgjmptw2</a>
     <a href="https://ercraft.net">ercraft.net</a>
   </div>
   <p class="note">기간을 따로 적지 않은 숫자는 2026년 10월 29일 기준입니다. ERCraft 코드는 비공개라 면접 때 화면으로 보여 드릴 수 있습니다.</p>
 </footer>
+
 </div>
 </body>
 </html>
