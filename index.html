@@ -90,6 +90,17 @@
     .case figure img { width:86%; }
     #ercraft figure img { width:70%; }
   }
+
+  .users + .users { margin-top:4px; }
+  .users b { font-family:var(--display); font-weight:800; }
+  .hero-shot { margin-top:28px; }
+  .lead2 { font-size:15px; color:var(--muted); margin:10px 0 0; max-width:40em; }
+  pre.code { font-family:var(--mono); font-size:13px; line-height:1.6; background:#f6f7f9; border:1px solid var(--rule); padding:14px 16px; overflow-x:auto; margin:14px 0; max-width:100%; }
+  .repos { list-style:none; padding:0; margin:18px 0 0; }
+  .repos li { padding:6px 0; }
+  .repos b { font-family:var(--display); color:var(--ink); }
+  .repos span { color:var(--muted); font-size:14px; }
+  @media print { pre.code { break-inside:avoid; font-size:10.5px; white-space:pre-wrap; } }
 </style>
 </head>
 <body>
@@ -105,104 +116,130 @@
     </div>
   </div>
   <h1>이터널 리턴 전적 사이트<br>ERCraft를 만들어 운영합니다</h1>
-  <p class="lead">2026년 7월에 연 개인 프로젝트입니다. 기획부터 화면, 서버, DB, 배포까지 직접 맡고 있고, 코드는 Claude Code와 Codex로 씁니다.</p>
+  <p class="lead">2026년 7월에 연 개인 프로젝트입니다. 기획, 화면, 서버, DB, 배포, 운영을 직접 맡고 있습니다. 코드는 AI 코딩 도구로 쓰고, 바뀐 코드와 테스트 결과, 서버 로그를 제가 확인한 뒤 배포합니다.</p>
+  <div class="users" style="margin-top:22px"><b>1,466명</b><span>하루 평균 사용자 · GA4, 2026.10.20–30 중 점검일(10.29)을 뺀 10일</span></div>
+  <div class="users"><b>52만 건</b><span>검색 요청 32만 건 + 전적 갱신 요청 20만 건 · 서버 기록, 2026.8.2–10.31</span></div>
   <figure class="hero-shot">
     <img src="img/er-home.jpg" alt="ERCraft 첫 화면" width="1600" height="933">
   </figure>
-  <div class="users"><b>1,466명</b><span>하루 평균 방문자 · GA4, 2026.10.20–30(점검일 29일 제외)</span></div>
-  <div class="users"><b>52만 건</b><span>사용자가 직접 한 닉네임 검색 32만 건, 전적 갱신 20만 건 · 서버 기록, 최근 90일(8.2–10.31)</span></div>
 </header>
-
 <section class="block" id="cases">
-  <h2>사례</h2>
+  <h2>ERCraft 사례</h2>
 
   <article class="case">
     <div class="delta"><s>3명</s><span class="to">→</span><b>24명</b></div>
-    <p class="delta-note">문의한 경기에 저장된 플레이어 기록</p>
+    <p class="delta-note">문의한 경기 1건에 저장된 플레이어 기록</p>
     <h3>"팀원 기록이 없다"는 문의를 받고 경기 기록을 다시 받아 왔습니다</h3>
-    <p class="meta">ERCraft · 2026.10 · 사용자 문의 대응</p>
-    <p>팀원 기록이 "공식 기록 없음"으로 뜬다는 문의를 받고 확인해 보니, 24명이 있어야 할 경기 기록에 3명만 남아 있었습니다.</p>
-    <p>경기가 끝나기 전에 받아 둔 상세 기록이 완성본으로 저장돼 있었습니다. 받은 지 24시간이 안 됐는데 1등 기록이 없는 경기는, 전적을 갱신할 때 다시 받도록 고쳤습니다.</p>
-    <p>배포 후 문의한 사용자의 경기 6개가 복구되고 팀원 기록도 정상으로 뜨는 것을 확인했습니다. 7일이 지나 원본을 다시 받을 수 없는 경기는 "기록 부족"으로 따로 표시합니다.</p>
+    <p class="meta">2026.10 · 사용자 문의 대응</p>
+    <p>팀원 기록에 "공식 기록 없음"이 뜬다는 문의를 받았습니다. 확인해 보니 24명이 있어야 할 경기 기록에 3명만 남아 있었습니다.</p>
+    <p>경기가 끝나기 전에 받아 둔 미완성 기록이 완성본으로 저장된 게 원인이었습니다. 받은 지 24시간 안이면서 1등 기록이 없는 경기는, 전적을 갱신할 때 다시 받게 고쳤습니다.</p>
+    <p>배포 후 문의한 사용자의 경기 6개가 복구된 것을 확인했습니다. 7일이 지나 원본을 다시 받을 수 없는 경기는 "기록 부족"으로 따로 표시합니다.</p>
   </article>
 
   <article class="case">
     <div class="delta"><s>5.3초</s><span class="to">→</span><b>1.75초</b></div>
-    <p class="delta-note">첫 검색 대기 시간 · 그중 플레이어 확인 단계 4,077ms → 205ms</p>
+    <p class="delta-note">첫 검색 대기 시간 · 저장된 기록이 6주 전인 플레이어 1명 실측 · 그중 확인 단계 4.08초 → 0.21초</p>
     <h3>첫 검색 대기 시간을 줄였습니다</h3>
-    <p class="meta">ERCraft · 2026.10 · Node.js, Fastify, 공식 게임 API</p>
-    <p>운영자용 진단 화면에서 첫 검색의 단계별 처리 시간을 보니, 플레이어 확인 단계 하나가 4초를 쓰고 있었습니다. 저장된 기록이 지금 검색한 플레이어의 것인지 확인하려고 공식 경기 목록에서 최근 경기 3개를 찾는 단계입니다.</p>
-    <p>코드가 이 목록을 매번 맨 앞부터 넘기고 있었습니다. 공식 API가 다음 페이지를 경기 번호로 넘겨준다는 걸 실제 응답으로 확인하고, 저장된 가장 최근 경기 다음부터 찾게 바꿨습니다. 찾지 못하면 기존처럼 처음부터 다시 조회합니다.</p>
+    <p class="meta">2026.10 · Node.js, Fastify, 공식 게임 API</p>
+    <p>운영자용 진단 화면에서 단계별 시간을 보니, 플레이어 확인 단계 하나가 4초를 쓰고 있었습니다. 저장된 기록이 이 플레이어의 것인지 확인하려고 공식 경기 목록에서 최근 경기 3개를 찾는 단계입니다.</p>
+    <p>기존 코드는 이 목록을 매번 첫 페이지부터 차례로 조회하고 있었습니다. 공식 API가 다음 페이지 위치를 경기 번호로 준다는 걸 실제 응답으로 확인하고, 저장된 최신 경기 다음부터 조회하게 바꿨습니다. 못 찾으면 처음부터 다시 조회합니다.</p>
   </article>
+</section>
+<section class="block" id="code">
+  <h2>확인할 수 있는 코드</h2>
+  <p class="intro-ai">ERCraft 코드는 비공개지만, 공식 API 연동 부분을 떼어 공개한 라이브러리에서 코드를 볼 수 있습니다.</p>
+  <ul class="repos">
+    <li><b><a href="https://github.com/adgjmptw2/eternal-return-api">eternal-return-api</a></b> <span>TypeScript · npm 공개 · 테스트 49개를 Node 18~24에서 자동 실행 · 요청 속도 제한, 429 재시도, 응답 캐시, AI 도구용 MCP 서버 · <a href="https://adgjmptw2.github.io/eternal-return-api/documents/GUIDE.html">실제 경기 30판으로 확인한 가이드</a></span></li>
+  </ul>
 
   <article class="case">
-    <h3 style="margin-top:0">AI가 게임을 끝까지 플레이하는 테스트 도구를 만들었습니다</h3>
+    <h3 style="margin-top:0">고친 코드 한 곳: 팀 순위를 누구 기록에서 가져올까</h3>
+    <p class="meta">2026.10 · <a href="https://github.com/adgjmptw2/eternal-return-api/blob/main/src/teams.ts">src/teams.ts</a> · <a href="https://github.com/adgjmptw2/eternal-return-api/blob/main/test/cache.test.mjs">테스트</a></p>
+    <p>한 경기의 참가자를 팀으로 묶는 함수입니다. 처음에는 팀 순위와 팀 킬을 첫 번째 팀원 기록에서 가져왔습니다.</p>
+    <p>실제 경기 기록을 확인하다, 게임을 포기한 플레이어 행에는 나간 시점의 값(5위, 팀 킬 14)이 남고 팀원 행에는 3위, 18이 남은 경기를 찾았습니다. 포기한 사람이 첫 번째로 오면 팀 순위가 틀리게 나옵니다. 그래서 포기하지 않은 팀원 중 가장 오래 남은 사람을 기준으로 바꿨습니다.</p>
+<pre class="code">// A player who gave up keeps their rank and team kills from when they left,
+// so team values come from someone who stayed: not given up, longest duration.
+function stayScore(p: UserGame): [number, number] {
+  const duration = typeof p.duration === 'number' &amp;&amp; Number.isFinite(p.duration) ? p.duration : -1
+  return [p.giveUp === 1 ? 0 : 1, duration]
+}
+
+function lastToLeave(members: UserGame[]): UserGame {
+  let best = members[0]!
+  let bestScore = stayScore(best)
+  for (const p of members) {
+    const score = stayScore(p)
+    if (score[0] &gt; bestScore[0] || (score[0] === bestScore[0] &amp;&amp; score[1] &gt; bestScore[1])) {
+      best = p
+      bestScore = score
+    }
+  }
+  return best
+}</pre>
+    <p>처음 고친 버전은 남은 시간만 비교했습니다. 다른 모델에게 검토를 맡겼더니 "시간이 같거나 값이 비어 있으면 입력 순서에 따라 결과가 달라진다"는 지적이 나왔습니다. 그래서 포기 여부를 먼저 보고, 시간 값이 없으면 맨 뒤로 보내게 고친 뒤 순서를 바꿔도 같은 결과가 나오는지 테스트를 추가했습니다.</p>
+  </article>
+</section>
+<section class="block" id="ercraft">
+  <h2>ERCraft를 운영하며 한 일</h2>
+  <ul class="log">
+    <li><b>개발사에 문의해 리플레이 파일 사용 허락</b><span>개발사에 문의해 리플레이 파일을 분석에 써도 된다는 답을 받았습니다. 조건에 맞춰 원본 파일은 분석 후 지우고, 삭제 요청 수단과 비공식 사이트 표시를 두었습니다.</span></li>
+    <li><b>전적 노출 차단 요청에 다음 날 대응</b><span>10월 26일 "내 전적을 지워 달라"는 요청을 받고, 다음 날 검색, 프로필, API, AI 분석에서 그 계정이 보이지 않게 막는 기능을 배포했습니다. API 4개 경로와 화면에서 직접 확인했습니다.</span></li>
+    <li><b>배포 당일 500 오류 약 3,500건</b><span>시즌 통계 API에서 난 오류였습니다. 서버 로그에서 함수 인자 순서가 바뀐 걸 찾아 같은 날 고쳐 다시 배포했습니다.</span></li>
+    <li><b>가장 큰 테이블 38.95GB → 16.3GB</b><span>서비스를 내리지 않고 압축했습니다. 압축 전후 같은 표본 2,000행의 해시를 비교해 내용이 같은지 확인했습니다.</span></li>
+    <li><b>AI 분석 문장의 숫자 검사</b><span>LLM이 생성한 플레이 분석 문장의 수치를 원본 데이터와 자동으로 대조합니다. 맞지 않는 문장은 화면에 내보내지 않습니다.</span></li>
+    <li><b>2026.10 그 밖의 작업</b><span>팀 단위 킬 기록 78만 경기를 모아 교전 기여 지표를 다시 계산했고, 리플레이 분석을 12.6 패치에 맞췄습니다. 성장 피드백 기능을 배포했고, 영어·일본어·중국어 번역은 아직 배포 전입니다.</span></li>
+  </ul>
+  <figure>
+    <img src="img/er-ai.jpg" alt="ERCraft AI 분석 화면" width="1265" height="712" loading="lazy">
+    <figcaption>AI 분석 화면</figcaption>
+  </figure>
+  <p class="stack">React 19 · TypeScript · Vite · Node.js(Fastify) · Prisma · MySQL 8 · Python · Cloudflare Pages/Tunnel · Windows 서버<br>Cloudflare 요청 2,455만 건(캐시 포함, 2026.9.27–10.27) · 저장한 경기 315만 건(경기마다 참가자 전원 기록)</p>
+</section>
+<section class="block" id="aiproj">
+  <h2>AI 프로젝트</h2>
+  <article class="case">
+    <h3 style="margin-top:0">AI가 게임을 끝까지 플레이하는 테스트 도구</h3>
     <p class="meta">루미아 덱(덱빌딩 게임) · 2026.10 · TypeScript, Phaser, LLM API</p>
-    <p>덱빌딩 게임을 만들면서 밸런스를 고칠 때마다 사람이 여러 판을 해 볼 수는 없었습니다. 목표는 "처음 하는 사람은 1막 후반, 해 본 사람은 3막에서 막힌다"였습니다.</p>
-    <p>AI 모델이 실제 게임 엔진에서 한 판을 끝까지 플레이하게 했습니다. 매 턴 상황을 넘기면 모델이 낼 카드와 대상을 JSON으로 답하고, 규칙에 어긋난 행동은 막고 횟수만 기록합니다. 여러 판을 동시에 돌리고 끝난 판은 바로 저장해서, 중간에 끊겨도 남은 판만 다시 돌립니다. 10월 19일 하루에 모델 3개로 21차까지 돌렸습니다.</p>
+    <p>덱빌딩 게임의 밸런스를 고칠 때마다 사람이 여러 판을 해 볼 수는 없었습니다. 목표는 "처음 하는 사람은 1막 후반, 해 본 사람은 3막에서 막힌다"였습니다.</p>
+    <p>AI 모델이 실제 게임 엔진에서 한 판을 끝까지 플레이하게 했습니다. 매 턴 상황을 넘기면 모델이 낼 카드와 대상을 JSON으로 답하고, 규칙에 어긋난 행동은 막고 횟수만 기록합니다. 여러 판을 동시에 돌리고 끝난 판은 바로 저장해, 중간에 끊겨도 남은 판만 다시 돌립니다. 10월 19일 하루에 모델 3개로 21차례 돌렸습니다.</p>
     <p>AI 점수를 올리려고 난이도를 낮췄다가, 직접 해 본 첫 판에 3막까지 쉽게 깼습니다. 너무 쉬워졌다고 보고 낮춘 부분 일부를 되돌렸습니다.</p>
     <figure>
       <img src="img/lumia-combat.jpg" alt="루미아 덱 전투 화면" width="1600" height="900" loading="lazy">
       <figcaption>루미아 덱 전투 화면. 그림은 개발사 공식 팬킷을 썼습니다.</figcaption>
     </figure>
   </article>
-</section>
-
-<section class="block" id="ercraft">
-  <h2>ERCraft를 운영하며 한 일</h2>
-  <ul class="log">
-    <li><b>전적 삭제 요청을 받고 다음 날 노출 차단</b><span>10월 26일 "내 전적을 지워 달라"는 요청을 받았습니다. 다음 날 검색, 프로필, API, AI 분석에서 그 계정이 보이지 않게 막는 기능을 배포했고, API 4개 경로와 화면에서 직접 확인했습니다. DB에 저장된 전적은 지우지 않았습니다.</span></li>
-    <li><b>개발사와 리플레이 파일 사용 조건 조율</b><span>게임사 개발자와 리플레이 파일을 분석에 쓰는 조건을 맞췄습니다. 원본 파일은 분석 후 지우고, 삭제 요청 수단을 두고, 비공식 사이트라고 표시합니다.</span></li>
-    <li><b>가장 큰 테이블 38.95GB → 16.3GB</b><span>서비스를 내리지 않고 압축했습니다. 압축 전후로 같은 표본 2,000행의 해시를 비교해 내용이 같은지 확인했습니다.</span></li>
-    <li><b>배포 뒤 생긴 오류를 같은 날 수정</b><span>배포 당일 시즌 통계 API에서 500 오류가 약 3,500번 났습니다. 서버 로그에서 함수 인자 순서가 바뀐 걸 찾아 그날 고쳐 다시 배포했습니다.</span></li>
-    <li><b>AI 분석 문장의 숫자 검사</b><span>LLM이 쓴 플레이 분석 문장의 수치를 원본 데이터와 자동으로 대조합니다. 불일치가 잡힌 문장은 화면에 내보내지 않습니다.</span></li>
-    <li><b>최근 작업</b><span>공식 API의 팀 단위 킬 기록 78만 판을 모아 교전 기여 지표를 다시 계산했고, 리플레이 분석을 12.6 패치에 맞췄습니다. 성장 피드백 기능을 배포했고, 영어·일본어·중국어 번역은 진행 중입니다.</span></li>
+  <ul class="work">
+    <li>
+      <div class="t"><b>카톡 AI 원격 비서</b><span>Python · 2026.10 · <a href="https://github.com/adgjmptw2/kakao-ai-agent">GitHub</a> 공개(MIT 라이선스)</span></div>
+      <p>카톡 '나와의 채팅'으로 집 PC의 Claude Code, Codex, Gemini에 일을 시키고 결과를 받습니다. 내 계정이 보낸 '/' 명령만 받고, 기본은 읽기 모드이며, 파일은 실행 담당 AI만 고칩니다.</p>
+    </li>
   </ul>
-  <figure>
-    <img src="img/er-ai.jpg" alt="ERCraft AI 분석 화면" width="1265" height="712" loading="lazy">
-    <figcaption>AI 분석 화면</figcaption>
-  </figure>
-  <p class="stack">React 19 · TypeScript · Vite · Node.js(Fastify) · Prisma · MySQL 8 · Python · Cloudflare Pages/Tunnel · Windows 서버<br>30일 요청 2,455만 건(Cloudflare, 캐시 포함, 9.27–10.27) · 수집해 저장한 경기 315만 판(참가자 전원 기록)</p>
 </section>
-
 <section class="block" id="ai">
-  <h2>AI로 일하는 방식</h2>
-  <p class="intro-ai">Claude Code와 Codex로 코드를 씁니다. 무엇을 만들지 정하고, 바뀐 코드와 실제 화면을 확인한 뒤 배포합니다.</p>
+  <h2>AI로 쓴 코드를 확인하는 방법</h2>
   <ul class="log">
-    <li><b>배포 전 테스트 확인</b><span>배포 전에 전체 테스트를 돌려 기존 실패 목록과 비교하고, 새로 깨진 테스트가 없을 때만 배포합니다. 배포할 때 Git 훅이 테스트 기록을 확인해, 기록이 없거나 30분이 지났으면 진행을 막습니다.</span></li>
-    <li><b>AI 코드는 바뀐 범위부터 확인</b><span>요청하지 않은 곳까지 같이 바뀌는 일이 잦아서 diff에서 그 부분을 먼저 봅니다. 중요한 변경은 코드를 쓴 모델과 다른 모델에게 한 번 더 검토를 맡깁니다.</span></li>
-    <li><b>쓰는 AI 도구</b><span>코드는 Claude Code(Claude Pro 2개)와 Codex(ChatGPT Pro)로 쓰고, 중요한 변경은 다른 모델(GPT, DeepSeek)에게 검토를 맡깁니다. 글은 Gemini로 다듬습니다. 그 밖에 ChatGPT Plus, Gemini Pro, DeepSeek, Muse, 로컬 LLM(Ollama)을 씁니다.</span></li>
+    <li><b>바뀐 범위부터 확인</b><span>AI는 요청하지 않은 코드까지 바꾸는 경우가 많아, diff에서 범위 밖 변경을 먼저 봅니다. 중요한 변경은 코드를 쓴 모델과 다른 모델에게 한 번 더 검토를 맡깁니다.</span></li>
+    <li><b>배포 전 테스트</b><span>배포 전에 테스트 전체를 돌려 기존 실패 목록과 비교하고, 새로 깨진 테스트가 없을 때만 배포합니다. Git 훅이 테스트 기록이 없거나 30분이 지났으면 배포를 막습니다.</span></li>
     <li><b>받지 않은 제안</b><span>다국어 AI 분석을 처음부터 외국어로 만들자는 제안이 있었습니다. 그러면 한국어 기준으로 만든 숫자·근거 검사를 건너뛰게 됩니다. 그래서 한국어로 먼저 만들어 검사를 통과시킨 뒤 번역하게 했습니다.</span></li>
   </ul>
 </section>
-
 <section class="block" id="work">
   <h2>다른 작업</h2>
   <ul class="work">
     <li>
-      <div class="t"><b>이터널 리턴 Open API 라이브러리</b><span>TypeScript · 2026.10 · <a href="https://www.npmjs.com/package/eternal-return-api">npm</a> · <a href="https://github.com/adgjmptw2/eternal-return-api">GitHub</a> 공개(MIT)</span></div>
-      <p>ERCraft에서 쓰는 Open API 연동 코드를 떼어 npm 패키지로 공개했습니다. 요청 속도 제한, 429 재시도, 시즌 번호 변환처럼 운영하며 다듬은 부분을 담았습니다. 태그를 올리면 GitHub Actions가 Node 18~24에서 테스트한 뒤 npm과 문서 사이트에 배포합니다.</p>
-      <p>공식 문서에 없는 응답 동작은 실제 경기 30판(594행)으로 확인해 <a href="https://adgjmptw2.github.io/eternal-return-api/documents/GUIDE.html">실전 가이드</a>로 정리했습니다. 예를 들어 게임을 포기한 플레이어는 순위와 팀 킬이 나간 시점 값으로 남아, 팀 값을 계산하는 코드도 이에 맞게 고쳤습니다.</p>
-    </li>
-    <li>
-      <div class="t"><b>카톡 AI 원격 비서</b><span>Python · 2026.10 · <a href="https://github.com/adgjmptw2/kakao-ai-agent">GitHub</a> 공개(MIT)</span></div>
-      <p>카톡 '나와의 채팅'으로 집 PC의 Claude Code, Codex, Gemini에 일을 시키고 결과를 받습니다. 내 계정이 보낸 '/' 명령만 받고, 기본은 읽기 모드입니다. 팀 모드에서는 계획, 실행, 검토를 서로 다른 AI가 맡고, 파일은 실행 담당만 고칩니다.</p>
+      <div class="t"><b>리썰 컴퍼니 모드 14개</b><span>C# · 2026.03–06 · 합계 다운로드 96,734 · <a href="https://thunderstore.io/c/lethal-company/p/MINE9289/">Thunderstore</a></span></div>
+      <p>Unity 게임 리썰 컴퍼니용 한국어 번역 패치, 기존 모드를 고친 버전, 직접 만든 모드를 올렸습니다.</p>
     </li>
     <li>
       <div class="t"><b>좀보이드 스토리 자동 진행 애드온</b><span>Lua · Steam 창작마당 구독 641 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></span></div>
       <p>관리자가 손으로 넘기던 스토리 진행을 서버에서 자동으로 돌게 했습니다.</p>
     </li>
     <li>
-      <div class="t"><b>리썰 컴퍼니 모드 14개</b><span>C# · 14개 합계 다운로드 96,734 · <a href="https://thunderstore.io/c/lethal-company/p/MINE9289/">Thunderstore</a></span></div>
-      <p>Unity 게임 리썰 컴퍼니용 한국어 번역 패치, 기존 모드를 고친 버전, 직접 만든 모드를 올렸습니다.</p>
-    </li>
-    <li>
-      <div class="t"><b>디스코드 봇</b><span>TypeScript · GitHub ★69 · <a href="https://github.com/adgjmptw2/MINE-Discord-Bot">GitHub</a></span></div>
+      <div class="t"><b>디스코드 봇</b><span>TypeScript · GitHub 스타 69개 · <a href="https://github.com/adgjmptw2/MINE-Discord-Bot">GitHub</a></span></div>
       <p>음악 재생, 서버 코인, 모의투자 기능이 있는 개인 서버용 봇입니다.</p>
     </li>
   </ul>
 </section>
-
 <footer>
   <b style="font-family:var(--display);color:var(--ink)">김정현</b>
   <div class="c">
@@ -210,7 +247,7 @@
     <a href="https://github.com/adgjmptw2">github.com/adgjmptw2</a>
     <a href="https://ercraft.net">ercraft.net</a>
   </div>
-  <p class="note">기간을 따로 적지 않은 숫자는 2026년 10월 31일 기준입니다. ERCraft 코드는 비공개라 면접 때 화면으로 보여 드릴 수 있습니다.</p>
+  <p class="note">기간을 따로 적지 않은 숫자는 2026년 10월 31일 기준입니다. ERCraft 코드는 비공개라, 면접에서 코드를 직접 열어 설명할 수 있습니다.</p>
 </footer>
 
 </div>
