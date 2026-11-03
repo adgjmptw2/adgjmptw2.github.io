@@ -101,6 +101,17 @@
   .repos b { font-family:var(--display); color:var(--ink); }
   .repos span { color:var(--muted); font-size:14px; }
   @media print { pre.code { break-inside:avoid; font-size:10.5px; white-space:pre-wrap; } }
+
+  .arch-wrap { overflow-x:auto; margin-top:22px; }
+  .arch { display:block; width:100%; min-width:640px; height:auto; font-family:var(--text); }
+  .arch .ln path { stroke:#666c78; stroke-width:1.6; fill:none; }
+  .arch .zone { fill:#f6f7f9; stroke:#c8ccd4; stroke-dasharray:5 4; }
+  .arch .zl { font-size:13px; fill:#666c78; }
+  .arch .bx rect { fill:#fff; stroke:#14161b; stroke-width:1.3; }
+  .arch .bx.ex rect { stroke:#c42a52; }
+  .arch .bx.wk rect { stroke:#14161b; stroke-dasharray:4 3; }
+  .arch .bx text { font-size:15px; font-weight:700; fill:#14161b; text-anchor:middle; }
+  .arch .bx text.s { font-size:12px; font-weight:400; fill:#666c78; }
 </style>
 </head>
 <body>
@@ -115,41 +126,108 @@
       <span>rlawjdgus2900@gmail.com</span>
     </div>
   </div>
-  <h1>이터널 리턴 전적 사이트<br>ERCraft를 만들어 운영합니다</h1>
-  <p class="lead">2026년 7월에 연 개인 프로젝트입니다. 기획, 화면, 서버, DB, 배포, 운영을 직접 맡고 있습니다. 코드는 AI 코딩 도구로 쓰고, 바뀐 코드와 테스트 결과, 서버 로그를 제가 확인한 뒤 배포합니다.</p>
-  <div class="users" style="margin-top:22px"><b>1,466명</b><span>하루 평균 사용자 · GA4, 2026.10.20–30 중 점검일(10.29)을 뺀 10일</span></div>
+  <h1>Node.js·TypeScript·React<br>풀스택 개발자</h1>
+  <p class="lead">이터널 리턴 전적 사이트 ERCraft를 혼자 만들어 2026년 7월부터 운영하고 있습니다. 닉네임을 검색하면 공식 API에서 경기 기록을 받아 전적과 분석을 보여 주는 서비스입니다. 기획부터 화면, 서버, DB, 배포, 문의 대응까지 직접 맡고 있습니다.</p>
+  <div class="users" style="margin-top:22px"><b>하루 평균 1,466명</b><span>사용자 · GA4, 2026.10.20–30 중 점검일(10.29)을 뺀 10일</span></div>
   <div class="users"><b>52만 건</b><span>검색 요청 32만 건 + 전적 갱신 요청 20만 건 · 서버 기록, 2026.8.2–10.31</span></div>
+  <div class="users"><b>경기 315만 건</b><span>MySQL에 저장한 경기 기록</span></div>
+  <div class="users"><b>테스트 160개</b><span>공개 라이브러리 · TypeScript 79개 + Python 81개 · npm·PyPI 공개</span></div>
   <figure class="hero-shot">
     <img src="img/er-home.jpg" alt="ERCraft 첫 화면" width="1600" height="933">
   </figure>
 </header>
 <section class="block" id="cases">
   <h2>ERCraft 사례</h2>
+  <p class="intro-ai" style="margin-top:14px">사례 코드는 비공개 저장소인 ERCraft에서 일부만 가져왔습니다. 공개 코드는 아래 라이브러리에서 볼 수 있습니다.</p>
 
   <article class="case">
+    <div class="delta"><s>5.3초</s><span class="to">→</span><b>1.75초</b></div>
+    <p class="delta-note">첫 검색 대기 시간 · 저장된 기록이 6주 전인 플레이어 1명 실측 · 확인 단계는 따로 재서 4.08초 → 0.21초</p>
+    <h3>첫 검색 대기 시간을 줄였습니다</h3>
+    <p class="meta">2026.10 · TypeScript, Node.js, Fastify, 공식 게임 API</p>
+    <p>운영자용 진단 화면에서 단계별 시간을 보니, 플레이어 확인 단계 하나에서 4초가 걸리고 있었습니다. 저장된 기록이 이 플레이어의 것인지 확인하려고 공식 경기 목록에서 최근 경기 3개를 찾는 단계입니다.</p>
+    <p>기존 코드는 이 목록을 매번 첫 페이지부터 차례로 조회하고 있었습니다. 최근 확인 결과를 재사용하는 방법도 있었지만, 그러면 기록 주인을 확인하는 규칙이 바뀌어 쓰지 않았습니다. 규칙은 그대로 두고 찾기 시작하는 위치만 앞당겼습니다.</p>
+    <p>공식 API가 다음 페이지 위치를 경기 번호로 준다는 걸 실제 응답으로 확인하고, 저장된 최신 경기 다음부터 조회하게 바꿨습니다. 못 찾으면 처음부터 다시 조회합니다.</p>
+<pre class="code">// Games newer than every anchor cannot prove anything, so start just above the newest
+// anchor when the client's cursor is an official gameId. A miss rescans from the top.
+const startCursor = (() =&gt; {
+  if (bser.userGamesCursorIsGameId !== true) return undefined
+  let largest = -1
+  for (const gameId of anchorGameIds) {
+    if (!/^[0-9]+$/.test(gameId)) return undefined
+    const numeric = Number(gameId)
+    if (!Number.isSafeInteger(numeric)) return undefined
+    largest = Math.max(largest, numeric)
+  }
+  if (largest &lt; 0) return undefined
+  const cursor = largest + 1
+  return Number.isSafeInteger(cursor) ? cursor : undefined
+})()</pre>
+  </article>
+  <article class="case">
     <div class="delta"><s>3명</s><span class="to">→</span><b>24명</b></div>
-    <p class="delta-note">문의한 경기 1건에 저장된 플레이어 기록</p>
-    <h3>"팀원 기록이 없다"는 문의를 받고 경기 기록을 다시 받아 왔습니다</h3>
-    <p class="meta">2026.10 · 사용자 문의 대응</p>
+    <p class="delta-note">문의한 경기 1건에 저장된 플레이어 수</p>
+    <h3>"팀원 기록이 없다"는 문의에서 미완성으로 저장된 경기 기록을 찾아 고쳤습니다</h3>
+    <p class="meta">2026.10 · 사용자 문의 대응 · TypeScript, Prisma, MySQL, 공식 게임 API</p>
     <p>팀원 기록에 "공식 기록 없음"이 뜬다는 문의를 받았습니다. 확인해 보니 24명이 있어야 할 경기 기록에 3명만 남아 있었습니다.</p>
-    <p>경기가 끝나기 전에 받아 둔 미완성 기록이 완성본으로 저장된 게 원인이었습니다. 받은 지 24시간 안이면서 1등 기록이 없는 경기는, 전적을 갱신할 때 다시 받게 고쳤습니다.</p>
+    <p>경기가 끝나기 전에 받아 둔 미완성 기록이 완성본으로 저장된 게 원인이었습니다. 끝난 경기도 24명보다 적을 수 있어서, 완성 여부는 참가자 수가 아니라 1등 기록이 있는지로 판단합니다. 다시 받을 대상은 플레이한 지 24시간이 지나지 않은 경기로 좁혔습니다.</p>
+    <p>첫 수정 뒤에도 문제가 남았습니다. 전적 갱신이 저장된 최신 경기에서 멈춰서, 그보다 오래된 미완성 경기를 다시 보지 못했습니다. 40분 뒤, 이미 받은 페이지에 있는 저장된 경기도 확인하게 고쳤습니다. 기록을 고치기만 한 갱신이 "변경 없음"으로 끝나 팀운 화면이 그대로이던 문제도 함께 고쳤습니다.</p>
+<pre class="code">if (stoppedReason === 'existing-game') {
+  // A refresh stops at the first stored game. Later stored games on this
+  // already-fetched page are revisited only when their detail was fetched
+  // before the game ended (recent and winnerless).
+  const repairUid = ownerGameState.incompleteRecentGameIds.has(match.matchId)
+    ? repairSources.get(match.matchId)
+    : undefined</pre>
     <p>배포 후 문의한 사용자의 경기 6개가 복구된 것을 확인했습니다. 7일이 지나 원본을 다시 받을 수 없는 경기는 "기록 부족"으로 따로 표시합니다.</p>
   </article>
 
   <article class="case">
-    <div class="delta"><s>5.3초</s><span class="to">→</span><b>1.75초</b></div>
-    <p class="delta-note">첫 검색 대기 시간 · 저장된 기록이 6주 전인 플레이어 1명 실측 · 그중 확인 단계 4.08초 → 0.21초</p>
-    <h3>첫 검색 대기 시간을 줄였습니다</h3>
-    <p class="meta">2026.10 · Node.js, Fastify, 공식 게임 API</p>
-    <p>운영자용 진단 화면에서 단계별 시간을 보니, 플레이어 확인 단계 하나가 4초를 쓰고 있었습니다. 저장된 기록이 이 플레이어의 것인지 확인하려고 공식 경기 목록에서 최근 경기 3개를 찾는 단계입니다.</p>
-    <p>기존 코드는 이 목록을 매번 첫 페이지부터 차례로 조회하고 있었습니다. 공식 API가 다음 페이지 위치를 경기 번호로 준다는 걸 실제 응답으로 확인하고, 저장된 최신 경기 다음부터 조회하게 바꿨습니다. 못 찾으면 처음부터 다시 조회합니다.</p>
+    <h3 style="margin-top:0">LLM이 쓴 분석 문장의 숫자를 원본 데이터와 대조합니다</h3>
+    <p class="meta">2026.9 · TypeScript, LLM API</p>
+    <p>LLM은 승률이나 순위가 틀려도 자연스러운 문장을 씁니다. 그래서 글을 항목별 JSON으로 쓰게 하고, 항목마다 근거로 쓴 데이터 키를 붙이게 했습니다. 검사기는 문장 속 숫자가 근거 값과 정확히 같은지 확인하고, 반올림이나 "약 몇 %"도 틀린 것으로 봅니다.</p>
+    <p>처음에는 한 곳만 틀려도 글 전체를 다시 쓰게 해서, 맞던 항목까지 바뀌었습니다. 틀린 항목만 다시 쓰게 바꿨습니다. 이때 근거 키를 바꾸면 그 결과를 버립니다. 근거까지 바꿀 수 있으면, 검사를 통과하려고 근거를 바꿀 수 있기 때문입니다. 고친 결과는 처음부터 다시 검사하고, 통과하지 못하면 내보내지 않습니다.</p>
+    <pre class="code">// Semantic repair changes prose, never the evidence boundary of a card.
+if (record(original) &amp;&amp; record(patch.value)
+  &amp;&amp; JSON.stringify(original.factRefs) !== JSON.stringify(patch.value.factRefs)) return null</pre>
   </article>
+</section>
+<section class="block" id="arch">
+  <h2>서비스 구조</h2>
+  <div class="arch-wrap">
+  <svg class="arch" viewBox="0 0 800 360" role="img" aria-label="사용자 브라우저는 Cloudflare Pages에서 React 화면을 받고, Cloudflare Tunnel을 거쳐 Windows 서버의 API 서버로 요청합니다. API 서버는 AI 서버와 MySQL, 공식 게임 API와 통신합니다. 수집 작업은 공식 게임 API에서 받은 경기 기록을 MySQL에 저장하고, AI 서버는 LLM API를 호출합니다.">
+    <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="#666c78"/></marker></defs>
+    <rect class="zone" x="350" y="12" width="274" height="336" rx="4"/>
+    <text class="zl" x="362" y="32">Windows 서버</text>
+    <g class="ln">
+      <path d="M71 150V84H170" marker-end="url(#ar)"/>
+      <path d="M126 180H170" marker-end="url(#ar)"/>
+      <path d="M320 180H372" marker-end="url(#ar)"/>
+      <path d="M486 150V100" marker-end="url(#ar)"/>
+      <path d="M422 210V268" marker-end="url(#ar)"/>
+      <path d="M498 300H476" marker-end="url(#ar)"/>
+      <path d="M602 74H664" marker-end="url(#ar)"/>
+      <path d="M602 180H664" marker-end="url(#ar)"/>
+      <path d="M604 300H664" marker-end="url(#ar)"/>
+    </g>
+    <g class="bx"><rect x="16" y="150" width="110" height="60" rx="4"/><text x="71" y="185">사용자 브라우저</text></g>
+    <g class="bx"><rect x="170" y="56" width="150" height="56" rx="4"/><text x="245" y="80">Cloudflare Pages</text><text class="s" x="245" y="99">React, Vite 화면</text></g>
+    <g class="bx"><rect x="170" y="150" width="150" height="60" rx="4"/><text x="245" y="176">Cloudflare Tunnel</text><text class="s" x="245" y="196">서버로 요청 전달</text></g>
+    <g class="bx"><rect x="372" y="48" width="230" height="52" rx="4"/><text x="487" y="70">AI 서버</text><text class="s" x="487" y="88">분석 문장 생성과 숫자 검사</text></g>
+    <g class="bx"><rect x="372" y="150" width="230" height="60" rx="4"/><text x="487" y="176">API 서버</text><text class="s" x="487" y="196">Node.js, Fastify, Prisma</text></g>
+    <g class="bx"><rect x="372" y="268" width="104" height="64" rx="4"/><text x="424" y="296">MySQL 8</text><text class="s" x="424" y="315">경기 315만 건</text></g>
+    <g class="bx"><rect x="498" y="268" width="106" height="64" rx="4"/><text x="551" y="296">수집 작업</text><text class="s" x="551" y="315">경기 기록 저장</text></g>
+    <g class="bx ex"><rect x="664" y="48" width="122" height="52" rx="4"/><text x="725" y="79">LLM API</text></g>
+    <g class="bx ex"><rect x="664" y="150" width="122" height="182" rx="4"/><text x="725" y="236">공식 게임 API</text></g>
+  </svg>
+  </div>
+  <p class="meta" style="margin-top:12px">주요 흐름만 그렸습니다. Windows 서버 한 대에서 운영하며, 화면은 Cloudflare Pages로 제공하고 데이터 요청은 Tunnel을 거쳐 서버로 보냅니다.</p>
 </section>
 <section class="block" id="code">
   <h2>확인할 수 있는 코드</h2>
   <p class="intro-ai">ERCraft 코드는 비공개지만, 공식 API 연동 부분을 떼어 공개한 라이브러리에서 코드를 볼 수 있습니다.</p>
   <ul class="repos">
-    <li><b><a href="https://github.com/adgjmptw2/eternal-return-api">eternal-return-api</a></b> <span>TypeScript · npm 공개 · 테스트 49개를 Node 18~24에서 자동 실행 · 요청 속도 제한, 429 재시도, 응답 캐시, AI 도구용 MCP 서버 · <a href="https://adgjmptw2.github.io/eternal-return-api/documents/GUIDE.html">실제 경기 30판으로 확인한 가이드</a></span></li>
+    <li><b><a href="https://github.com/adgjmptw2/eternal-return-api">eternal-return-api</a></b> <span>TypeScript·Python · npm·PyPI 공개 · 테스트 TypeScript 79개(Node 18~24)·Python 81개(3.10~3.14) 자동 실행 · 요청 속도 제한, 429 재시도, 응답 캐시, 새 경기만 받기, 경기 감시, AI 도구용 MCP 서버 · <a href="https://adgjmptw2.github.io/eternal-return-api/documents/GUIDE.html">실제 경기 30판으로 확인한 가이드</a></span></li>
   </ul>
 
   <article class="case">
@@ -176,17 +254,17 @@ function lastToLeave(members: UserGame[]): UserGame {
   }
   return best
 }</pre>
-    <p>처음 고친 버전은 남은 시간만 비교했습니다. 다른 모델에게 검토를 맡겼더니 "시간이 같거나 값이 비어 있으면 입력 순서에 따라 결과가 달라진다"는 지적이 나왔습니다. 그래서 포기 여부를 먼저 보고, 시간 값이 없으면 맨 뒤로 보내게 고친 뒤 순서를 바꿔도 같은 결과가 나오는지 테스트를 추가했습니다.</p>
+    <p>처음 고친 버전은 남은 시간만 비교했습니다. 다른 모델에게 검토를 맡겼더니 "시간이 같거나 값이 비어 있으면 입력 순서에 따라 결과가 달라진다"는 지적이 나왔습니다. 그래서 포기 여부를 먼저 보고, 시간 값이 없으면 맨 뒤로 보내도록 고쳤습니다. 포기 여부나 남은 시간이 다른 팀원은 입력 순서가 바뀌어도 같은 사람을 고르는지 확인하는 테스트를 추가했습니다.</p>
   </article>
 </section>
 <section class="block" id="ercraft">
   <h2>ERCraft를 운영하며 한 일</h2>
   <ul class="log">
+    <li><b>1분마다 22.7만 행을 처음부터 읽던 조회</b><span>테이블 조회에 인덱스를 서비스 중에 추가하고, 쓰이지 않던 인덱스는 지웠습니다.</span></li>
     <li><b>개발사에 문의해 리플레이 파일 사용 허락</b><span>개발사에 문의해 리플레이 파일을 분석에 써도 된다는 답을 받았습니다. 조건에 맞춰 원본 파일은 분석 후 지우고, 삭제 요청 수단과 비공식 사이트 표시를 두었습니다.</span></li>
     <li><b>전적 노출 차단 요청에 다음 날 대응</b><span>10월 26일 "내 전적을 지워 달라"는 요청을 받고, 다음 날 검색, 프로필, API, AI 분석에서 그 계정이 보이지 않게 막는 기능을 배포했습니다. API 4개 경로와 화면에서 직접 확인했습니다.</span></li>
     <li><b>배포 당일 500 오류 약 3,500건</b><span>시즌 통계 API에서 난 오류였습니다. 서버 로그에서 함수 인자 순서가 바뀐 걸 찾아 같은 날 고쳐 다시 배포했습니다.</span></li>
     <li><b>가장 큰 테이블 38.95GB → 16.3GB</b><span>서비스를 내리지 않고 압축했습니다. 압축 전후 같은 표본 2,000행의 해시를 비교해 내용이 같은지 확인했습니다.</span></li>
-    <li><b>AI 분석 문장의 숫자 검사</b><span>LLM이 생성한 플레이 분석 문장의 수치를 원본 데이터와 자동으로 대조합니다. 맞지 않는 문장은 화면에 내보내지 않습니다.</span></li>
     <li><b>2026.10 그 밖의 작업</b><span>팀 단위 킬 기록 78만 경기를 모아 교전 기여 지표를 다시 계산했고, 리플레이 분석을 12.6 패치에 맞췄습니다. 성장 피드백 기능을 배포했고, 영어·일본어·중국어 번역은 아직 배포 전입니다.</span></li>
   </ul>
   <figure>
@@ -220,6 +298,7 @@ function lastToLeave(members: UserGame[]): UserGame {
   <ul class="log">
     <li><b>바뀐 범위부터 확인</b><span>AI는 요청하지 않은 코드까지 바꾸는 경우가 많아, diff에서 범위 밖 변경을 먼저 봅니다. 중요한 변경은 코드를 쓴 모델과 다른 모델에게 한 번 더 검토를 맡깁니다.</span></li>
     <li><b>배포 전 테스트</b><span>배포 전에 테스트 전체를 돌려 기존 실패 목록과 비교하고, 새로 깨진 테스트가 없을 때만 배포합니다. Git 훅이 테스트 기록이 없거나 30분이 지났으면 배포를 막습니다.</span></li>
+    <li><b>다른 모델의 검토로 찾은 버그</b><span>라이브러리에 새 경기 감시 기능을 넣을 때 코드를 쓴 모델과 다른 모델 두 개에게 검토를 맡겼습니다. 끊어서 받을 때 "여기까지 받았다"는 표시가 남은 경기를 받기 전에 앞으로 가서 경기를 놓칠 수 있는 문제, 리다이렉트를 따라가면 API 키가 다른 서버로 갈 수 있는 문제가 나와 고쳤습니다. 이후 실제 API로 12명을 15분 동안 감시해, 요청 377번으로 경기 종료를 잡는 걸 확인했습니다.</span></li>
     <li><b>받지 않은 제안</b><span>다국어 AI 분석을 처음부터 외국어로 만들자는 제안이 있었습니다. 그러면 한국어 기준으로 만든 숫자·근거 검사를 건너뛰게 됩니다. 그래서 한국어로 먼저 만들어 검사를 통과시킨 뒤 번역하게 했습니다.</span></li>
   </ul>
 </section>
