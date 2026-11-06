@@ -127,9 +127,9 @@
     </div>
   </div>
   <h1>Node.js·TypeScript·React<br>풀스택 개발자</h1>
-  <p class="lead">이터널 리턴 전적 사이트 ERCraft를 혼자 만들어 2026년 7월부터 운영하고 있습니다. 닉네임을 검색하면 공식 API에서 경기 기록을 받아 전적과 분석을 보여 주는 서비스입니다. 기획부터 화면, 서버, DB, 배포, 문의 대응까지 직접 맡고 있습니다.</p>
+  <p class="lead">게임 전적 사이트 ERCraft를 혼자 만들어 2026년 7월부터 운영하고 있습니다. ERCraft는 한 경기에 최대 24명이 겨루는 온라인 게임 이터널 리턴의 전적(경기 성적) 사이트로, 플레이어 닉네임을 검색하면 게임사 공식 API에서 경기 기록을 받아 성적과 분석을 보여 줍니다. 기획부터 화면, 서버, DB, 배포, 문의 대응까지 직접 맡고 있습니다.</p>
   <div class="users" style="margin-top:22px"><b>하루 평균 1,466명</b><span>사용자 · GA4, 2026.10.20–30 중 점검일(10.29)을 뺀 10일</span></div>
-  <div class="users"><b>52만 건</b><span>검색 요청 32만 건 + 전적 갱신 요청 20만 건 · 서버 기록, 2026.8.2–10.31</span></div>
+  <div class="users"><b>52만 건</b><span>검색 요청 32만 건 + 기록 갱신 요청 20만 건 · 서버 기록, 2026.8.2–10.31</span></div>
   <div class="users"><b>경기 315만 건</b><span>MySQL에 저장한 경기 기록</span></div>
   <div class="users"><b>테스트 160개</b><span>공개 라이브러리 · TypeScript 79개 + Python 81개 · npm·PyPI 공개</span></div>
   <figure class="hero-shot">
@@ -171,7 +171,7 @@ const startCursor = (() =&gt; {
     <p class="meta">2026.10 · 사용자 문의 대응 · TypeScript, Prisma, MySQL, 공식 게임 API</p>
     <p>팀원 기록에 "공식 기록 없음"이 뜬다는 문의를 받았습니다. 확인해 보니 24명이 있어야 할 경기 기록에 3명만 남아 있었습니다.</p>
     <p>경기가 끝나기 전에 받아 둔 미완성 기록이 완성본으로 저장된 게 원인이었습니다. 끝난 경기도 24명보다 적을 수 있어서, 완성 여부는 참가자 수가 아니라 1등 기록이 있는지로 판단합니다. 다시 받을 대상은 플레이한 지 24시간이 지나지 않은 경기로 좁혔습니다.</p>
-    <p>첫 수정 뒤에도 문제가 남았습니다. 전적 갱신이 저장된 최신 경기에서 멈춰서, 그보다 오래된 미완성 경기를 다시 보지 못했습니다. 40분 뒤, 이미 받은 페이지에 있는 저장된 경기도 확인하게 고쳤습니다. 기록을 고치기만 한 갱신이 "변경 없음"으로 끝나 팀운 화면이 그대로이던 문제도 함께 고쳤습니다.</p>
+    <p>첫 수정 뒤에도 문제가 남았습니다. 기록 갱신이 저장된 최신 경기에서 멈춰서, 그보다 오래된 미완성 경기를 다시 보지 못했습니다. 40분 뒤, 이미 받은 페이지에 있는 저장된 경기도 확인하게 고쳤습니다. 기록을 고치기만 한 갱신이 "변경 없음"으로 끝나 팀원 운을 보여 주는 화면이 그대로이던 문제도 함께 고쳤습니다.</p>
 <pre class="code">if (stoppedReason === 'existing-game') {
   // A refresh stops at the first stored game. Later stored games on this
   // already-fetched page are revisited only when their detail was fetched
@@ -186,7 +186,7 @@ const startCursor = (() =&gt; {
     <h3 style="margin-top:0">LLM이 쓴 분석 문장의 숫자를 원본 데이터와 대조합니다</h3>
     <p class="meta">2026.9 · TypeScript, LLM API</p>
     <p>LLM은 승률이나 순위가 틀려도 자연스러운 문장을 씁니다. 그래서 글을 항목별 JSON으로 쓰게 하고, 항목마다 근거로 쓴 데이터 키를 붙이게 했습니다. 검사기는 문장 속 숫자가 근거 값과 정확히 같은지 확인하고, 반올림이나 "약 몇 %"도 틀린 것으로 봅니다.</p>
-    <p>처음에는 한 곳만 틀려도 글 전체를 다시 쓰게 해서, 맞던 항목까지 바뀌었습니다. 틀린 항목만 다시 쓰게 바꿨습니다. 이때 근거 키를 바꾸면 그 결과를 버립니다. 근거까지 바꿀 수 있으면, 검사를 통과하려고 근거를 바꿀 수 있기 때문입니다. 고친 결과는 처음부터 다시 검사하고, 통과하지 못하면 내보내지 않습니다.</p>
+    <p>처음에는 한 곳만 틀려도 글 전체를 다시 쓰게 해서, 맞던 항목까지 바뀌었습니다. 틀린 항목만 다시 쓰게 바꿨습니다. 이때 근거 키를 바꾸면 그 결과를 버립니다. 문장을 고칠 때 근거도 바꾸게 두면, 잘못된 문장이 검사를 통과할 수 있기 때문입니다. 고친 결과는 처음부터 다시 검사하고, 통과하지 못하면 내보내지 않습니다.</p>
     <pre class="code">// Semantic repair changes prose, never the evidence boundary of a card.
 if (record(original) &amp;&amp; record(patch.value)
   &amp;&amp; JSON.stringify(original.factRefs) !== JSON.stringify(patch.value.factRefs)) return null</pre>
@@ -233,8 +233,8 @@ if (record(original) &amp;&amp; record(patch.value)
   <article class="case">
     <h3 style="margin-top:0">고친 코드 한 곳: 팀 순위를 누구 기록에서 가져올까</h3>
     <p class="meta">2026.10 · <a href="https://github.com/adgjmptw2/eternal-return-api/blob/main/src/teams.ts">src/teams.ts</a> · <a href="https://github.com/adgjmptw2/eternal-return-api/blob/main/test/cache.test.mjs">테스트</a></p>
-    <p>한 경기의 참가자를 팀으로 묶는 함수입니다. 처음에는 팀 순위와 팀 킬을 첫 번째 팀원 기록에서 가져왔습니다.</p>
-    <p>실제 경기 기록을 확인하다, 게임을 포기한 플레이어 행에는 나간 시점의 값(5위, 팀 킬 14)이 남고 팀원 행에는 3위, 18이 남은 경기를 찾았습니다. 포기한 사람이 첫 번째로 오면 팀 순위가 틀리게 나옵니다. 그래서 포기하지 않은 팀원 중 가장 오래 남은 사람을 기준으로 바꿨습니다.</p>
+    <p>한 경기의 참가자를 팀으로 묶는 함수입니다. 처음에는 팀 순위와 팀 처치 수를 첫 번째 팀원 기록에서 가져왔습니다.</p>
+    <p>실제 경기 기록을 확인하다, 게임을 포기한 플레이어 행에는 나간 시점의 값(5위, 팀 처치 14)이 남고 팀원 행에는 3위, 18이 남은 경기를 찾았습니다. 포기한 사람이 첫 번째로 오면 팀 순위가 틀리게 나옵니다. 그래서 포기하지 않은 팀원 중 가장 오래 남은 사람을 기준으로 바꿨습니다.</p>
 <pre class="code">// A player who gave up keeps their rank and team kills from when they left,
 // so team values come from someone who stayed: not given up, longest duration.
 function stayScore(p: UserGame): [number, number] {
@@ -261,11 +261,11 @@ function lastToLeave(members: UserGame[]): UserGame {
   <h2>ERCraft를 운영하며 한 일</h2>
   <ul class="log">
     <li><b>1분마다 22.7만 행을 처음부터 읽던 조회</b><span>테이블 조회에 인덱스를 서비스 중에 추가하고, 쓰이지 않던 인덱스는 지웠습니다.</span></li>
-    <li><b>개발사에 문의해 리플레이 파일 사용 허락</b><span>개발사에 문의해 리플레이 파일을 분석에 써도 된다는 답을 받았습니다. 조건에 맞춰 원본 파일은 분석 후 지우고, 삭제 요청 수단과 비공식 사이트 표시를 두었습니다.</span></li>
+    <li><b>게임 개발사에 문의해 경기 데이터 파일 사용 허락</b><span>경기 내용을 다시 재생할 수 있는 데이터 파일(리플레이)을 분석에 쓰려고 게임 개발사에 문의해, 써도 된다는 답을 받았습니다. 조건에 맞춰 원본 파일은 분석 후 지우고, 삭제 요청 수단과 비공식 사이트 표시를 두었습니다.</span></li>
     <li><b>전적 노출 차단 요청에 다음 날 대응</b><span>10월 26일 "내 전적을 지워 달라"는 요청을 받고, 다음 날 검색, 프로필, API, AI 분석에서 그 계정이 보이지 않게 막는 기능을 배포했습니다. API 4개 경로와 화면에서 직접 확인했습니다.</span></li>
-    <li><b>배포 당일 500 오류 약 3,500건</b><span>시즌 통계 API에서 난 오류였습니다. 서버 로그에서 함수 인자 순서가 바뀐 걸 찾아 같은 날 고쳐 다시 배포했습니다.</span></li>
+    <li><b>배포 당일 500 오류 약 3,500건</b><span>시즌 통계 API에서 난 오류였습니다. 서버 로그에서 함수 인자 순서가 바뀐 걸 찾아 같은 날 고쳤습니다.</span></li>
     <li><b>가장 큰 테이블 38.95GB → 16.3GB</b><span>서비스를 내리지 않고 압축했습니다. 압축 전후 같은 표본 2,000행의 해시를 비교해 내용이 같은지 확인했습니다.</span></li>
-    <li><b>2026.10 그 밖의 작업</b><span>팀 단위 킬 기록 78만 경기를 모아 교전 기여 지표를 다시 계산했고, 리플레이 분석을 12.6 패치에 맞췄습니다. 성장 피드백 기능을 배포했고, 영어·일본어·중국어 번역은 아직 배포 전입니다.</span></li>
+    <li><b>2026.10 그 밖의 작업</b><span>팀 단위 기록 78만 경기를 모아 경기 기여도 지표를 다시 계산했고, 게임 업데이트에 맞춰 경기 데이터 파일 분석을 고쳤습니다. 플레이 개선 방법을 알려 주는 기능을 배포했고, 영어·일본어·중국어 번역은 아직 배포 전입니다.</span></li>
   </ul>
   <figure>
     <img src="img/er-ai.jpg" alt="ERCraft AI 분석 화면" width="1265" height="712" loading="lazy">
@@ -277,13 +277,13 @@ function lastToLeave(members: UserGame[]): UserGame {
   <h2>AI 프로젝트</h2>
   <article class="case">
     <h3 style="margin-top:0">AI가 게임을 끝까지 플레이하는 테스트 도구</h3>
-    <p class="meta">루미아 덱(덱빌딩 게임) · 2026.10 · TypeScript, Phaser, LLM API</p>
-    <p>덱빌딩 게임의 밸런스를 고칠 때마다 사람이 여러 판을 해 볼 수는 없었습니다. 목표는 "처음 하는 사람은 1막 후반, 해 본 사람은 3막에서 막힌다"였습니다.</p>
+    <p class="meta">루미아 덱(직접 만든 카드 게임) · 2026.10 · TypeScript, Phaser, LLM API</p>
+    <p>카드 게임의 난이도를 고칠 때마다 사람이 여러 판을 해 볼 수는 없었습니다. 목표는 처음 하는 사람은 1단계 후반, 해 본 사람은 3단계에서 막히는 난이도였습니다.</p>
     <p>AI 모델이 실제 게임 엔진에서 한 판을 끝까지 플레이하게 했습니다. 매 턴 상황을 넘기면 모델이 낼 카드와 대상을 JSON으로 답하고, 규칙에 어긋난 행동은 막고 횟수만 기록합니다. 여러 판을 동시에 돌리고 끝난 판은 바로 저장해, 중간에 끊겨도 남은 판만 다시 돌립니다. 10월 19일 하루에 모델 3개로 21차례 돌렸습니다.</p>
-    <p>AI 점수를 올리려고 난이도를 낮췄다가, 직접 해 본 첫 판에 3막까지 쉽게 깼습니다. 너무 쉬워졌다고 보고 낮춘 부분 일부를 되돌렸습니다.</p>
+    <p>AI 점수를 올리려고 난이도를 낮췄다가, 직접 해 본 첫 판에 3단계까지 쉽게 깼습니다. 너무 쉬워졌다고 보고 낮춘 부분 일부를 되돌렸습니다.</p>
     <figure>
       <img src="img/lumia-combat.jpg" alt="루미아 덱 전투 화면" width="1600" height="900" loading="lazy">
-      <figcaption>루미아 덱 전투 화면. 그림은 개발사 공식 팬킷을 썼습니다.</figcaption>
+      <figcaption>루미아 덱 전투 화면. 그림은 이터널 리턴 개발사가 팬 창작용으로 공개한 공식 자료를 썼습니다.</figcaption>
     </figure>
   </article>
   <ul class="work">
@@ -310,7 +310,7 @@ function lastToLeave(members: UserGame[]): UserGame {
       <p>Unity 게임 리썰 컴퍼니용 한국어 번역 패치, 기존 모드를 고친 버전, 직접 만든 모드를 올렸습니다.</p>
     </li>
     <li>
-      <div class="t"><b>좀보이드 스토리 자동 진행 애드온</b><span>Lua · Steam 창작마당 구독 641 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></span></div>
+      <div class="t"><b>게임 좀보이드 서버의 스토리 자동 진행 애드온</b><span>Lua · Steam 창작마당 구독 641 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></span></div>
       <p>관리자가 손으로 넘기던 스토리 진행을 서버에서 자동으로 돌게 했습니다.</p>
     </li>
     <li>
