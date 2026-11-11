@@ -1,0 +1,173 @@
+/* 포트폴리오 공통 모양. 화면(웹)과 A4 PDF에 같이 쓴다. */
+@font-face {
+  font-family: "Pretendard";
+  src: url("../fonts/PretendardVariable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root {
+  --paper: #ffffff;
+  --ink: #14161b;
+  --body: #32363e;
+  --muted: #6b717d;
+  --rule: #e4e6eb;
+  --soft: #f5f6f8;
+  --accent: #2552c9;
+  --sans: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "Malgun Gothic", monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--body);
+  font-family: var(--sans); font-size: 15px; line-height: 1.7;
+  word-break: keep-all; overflow-wrap: break-word;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+a { color: inherit; text-decoration: underline; text-decoration-color: #c9cdd6; text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--accent); }
+img { max-width: 100%; height: auto; display: block; }
+p { margin: 0 0 10px; }
+b, strong { color: var(--ink); font-weight: 650; }
+
+.page {
+  max-width: 800px; margin: 0 auto; padding-block: 48px 64px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* ── 첫 장 ── */
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; font-size: 13px; color: var(--muted); }
+.top .links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.name { font-size: 40px; line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); margin: 34px 0 6px; }
+.role { font-size: 18px; font-weight: 600; color: var(--ink); margin: 0; }
+.role span { color: var(--muted); font-weight: 500; }
+.lead { margin-top: 22px; max-width: 39em; font-size: 16px; line-height: 1.8; }
+.lead p { margin: 0 0 12px; }
+
+.label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); margin: 0 0 12px; }
+.made { margin-top: 36px; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 14px; }
+.card { min-width: 0; }
+.card .thumb { aspect-ratio: 16 / 9.4; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: #0d0f14; }
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.card .thumb.code { background: #14161b; color: #e7e9ee; font-family: var(--mono); font-size: 11px; line-height: 1.75; padding: 10px 16px; display: flex; flex-direction: column; justify-content: center; white-space: nowrap; }
+.card .thumb.code i { color: #8b93a3; font-style: normal; }
+.card .thumb.code em { color: #8fb4ff; font-style: normal; padding-left: 1.2em; }
+.card b { display: block; margin-top: 9px; font-size: 14.5px; line-height: 1.4; }
+.card span { display: block; font-size: 12.5px; line-height: 1.55; color: var(--muted); margin-top: 2px; }
+
+.skills { margin-top: 34px; }
+.kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 5px 16px; margin: 0; font-size: 14px; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; color: var(--ink); }
+.aside { margin-top: 14px; font-size: 13.5px; color: var(--muted); max-width: 42em; }
+
+/* ── 프로젝트 ── */
+.proj { margin-top: 72px; }
+.proj-head { border-top: 2px solid var(--ink); padding-top: 14px; }
+.proj-head .kind { font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent); }
+.proj-head h2 { font-size: 26px; line-height: 1.3; font-weight: 800; letter-spacing: -0.025em; color: var(--ink); margin: 2px 0 0; }
+.proj-head .sub { font-size: 15.5px; color: var(--body); margin: 2px 0 0; }
+.meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 28px; margin: 16px 0 0; padding: 12px 0; border-block: 1px solid var(--rule); font-size: 13.5px; }
+.meta div { display: grid; grid-template-columns: 3.4em 1fr; gap: 10px; min-width: 0; }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; color: var(--ink); min-width: 0; }
+.meta .wide { grid-column: 1 / -1; }
+.intro { margin-top: 16px; max-width: 42em; }
+.intro small, .note { font-size: 12.5px; color: var(--muted); }
+
+h3 { font-size: 17px; line-height: 1.45; font-weight: 750; letter-spacing: -0.015em; color: var(--ink); margin: 30px 0 10px; }
+h3 + .hint { margin: -6px 0 12px; font-size: 13.5px; color: var(--muted); }
+
+figure { margin: 0; }
+figure img { border: 1px solid var(--rule); border-radius: 8px; }
+figcaption { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin-top: 6px; }
+figcaption b { font-weight: 650; }
+.shot-main { margin-top: 18px; }
+.shot-main img { width: 100%; aspect-ratio: 16 / 9.3; object-fit: cover; object-position: top center; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 14px; margin-top: 16px; }
+.shots figure img { aspect-ratio: 16 / 10.4; object-fit: cover; object-position: top center; width: 100%; }
+.shots.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.shots.three figure img { aspect-ratio: 16 / 10; }
+.shots.wide16 figure img { aspect-ratio: 16 / 9; }
+.phones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.phones figure img { border-radius: 12px; }
+
+.points { list-style: none; padding: 0; margin: 0; }
+.points li { display: grid; grid-template-columns: 9.4em 1fr; gap: 2px 18px; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+.points li:first-child { border-top: 1px solid var(--rule); }
+.points li > * { min-width: 0; }
+.points b { line-height: 1.55; }
+.points span { display: block; }
+
+/* 문제 → 한 일 → 결과 */
+.case { margin-top: 14px; border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px 6px; }
+.case h4 { font-size: 15.5px; line-height: 1.45; font-weight: 750; color: var(--ink); margin: 0 0 2px; }
+.case .when { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; }
+.case dl { display: grid; grid-template-columns: 3.4em 1fr; gap: 6px 14px; margin: 0 0 10px; font-size: 14.5px; }
+.case dt { color: var(--accent); font-weight: 700; font-size: 13px; padding-top: 2px; }
+.case dd { margin: 0; min-width: 0; }
+
+pre.code { font-family: var(--mono); font-size: 12px; line-height: 1.6; background: var(--soft); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 12px 0; max-width: 100%; color: var(--ink); }
+
+.arch-wrap { overflow-x: auto; margin-top: 6px; }
+.arch { display: block; width: 100%; min-width: 600px; height: auto; font-family: var(--sans); }
+.arch .ln path { stroke: #7a808c; stroke-width: 1.4; fill: none; }
+.arch .zone { fill: var(--soft); stroke: #cfd3da; stroke-dasharray: 5 4; }
+.arch .zl { font-size: 12.5px; fill: #6b717d; }
+.arch .bx rect { fill: #fff; stroke: #14161b; stroke-width: 1.2; }
+.arch .bx.ex rect { stroke: var(--accent); }
+.arch .bx text { font-size: 14.5px; font-weight: 700; fill: #14161b; text-anchor: middle; }
+.arch .bx text.s { font-size: 11.5px; font-weight: 400; fill: #6b717d; }
+
+.two { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 22px; align-items: start; margin-top: 16px; }
+.two.even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.two > * { min-width: 0; }
+.two .intro { margin-top: 0; }
+
+.works { list-style: none; padding: 0; margin: 0; }
+.works li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.works li:first-child { border-top: 1px solid var(--rule); }
+.works .t { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+.works .t b { font-size: 15.5px; }
+.works .t span { font-size: 13px; color: var(--muted); }
+.works p { margin: 3px 0 0; max-width: 44em; }
+
+.closing { margin-top: 72px; border-top: 2px solid var(--ink); padding-top: 16px; }
+.closing .c { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 14px; color: var(--ink); }
+.closing .note { margin: 12px 0 0; max-width: 46em; }
+
+@media (max-width: 640px) {
+  .page { padding-block: 28px 48px; }
+  .name { font-size: 32px; margin-top: 24px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .meta { grid-template-columns: 1fr; }
+  .shots, .shots.three, .two, .two.even { grid-template-columns: 1fr; }
+  .phones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .points li { grid-template-columns: 1fr; }
+  .proj { margin-top: 56px; }
+}
+
+@page { size: A4; margin: 14mm 16mm 13mm; }
+@media print {
+  body { font-size: 13.4px; line-height: 1.64; }
+  .page { max-width: none; padding: 0; }
+  a { text-decoration: none; }
+  .name { font-size: 36px; margin-top: 22px; }
+  .lead { margin-top: 16px; font-size: 15px; line-height: 1.75; }
+  .made { margin-top: 26px; }
+  .skills { margin-top: 26px; }
+  .cards { gap: 14px 14px; }
+  .proj { margin-top: 0; break-before: page; }
+  .proj.flow { break-before: auto; margin-top: 30px; }
+  .proj.flow > h3:first-child { margin-top: 0; }
+  .closing { margin-top: 30px; break-inside: avoid; }
+  h3 { margin-top: 24px; break-after: avoid; }
+  .hint, .proj-head, .meta, .label, .intro { break-after: avoid; }
+  .case, figure, .card, .points li, .works li, pre.code, .arch-wrap { break-inside: avoid; }
+  #ops, #how, #works, #arch { break-inside: avoid; }
+  .arch { min-width: 0; }
+  pre.code { white-space: pre-wrap; font-size: 11px; }
+}
