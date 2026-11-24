@@ -21,8 +21,8 @@
   <h1 class="name">김정현</h1>
   <p class="role">풀스택 개발자 <span>· TypeScript · React · Node.js</span></p>
   <div class="lead">
-    <p>게임 전적 사이트 <b>ERCraft</b>를 혼자 만들어 2026년 7월부터 운영하고 있습니다. 하루 평균 1,466명이 쓰는 서비스이고, 기획부터 화면, 서버, DB, 배포, 문의 대응까지 직접 합니다.</p>
-    <p>개발은 2026년 3월에 독학으로 시작했습니다. 그 뒤로 웹 서비스, 공개 라이브러리, 안드로이드 앱, 게임, 영상을 만들었습니다.</p>
+    <p>게임 전적 사이트 <b>ERCraft</b>를 만들어 2026년 7월부터 운영하고 있습니다. 하루 평균 1,466명이 씁니다. 무엇을 만들지 정하는 일부터 배포와 문의 대응까지 혼자 맡고 있습니다.</p>
+    <p>2020년부터 마인크래프트 서버 외주를 해 왔습니다. 2026년 3월부터는 독학으로 본격적으로 개발해 웹 서비스, 오픈소스 라이브러리, 안드로이드 앱을 만들었습니다.</p>
   </div>
 
   <section class="made">
@@ -44,11 +44,6 @@
         <span>체중·식단 기록 안드로이드 앱</span>
       </div>
       <div class="card">
-        <div class="thumb"><img src="img/mv-island.jpg" alt="팬 뮤직비디오" style="object-position:center"></div>
-        <b>팬 뮤직비디오</b>
-        <span>React 코드로 만든 3분 32초 영상. YouTube 공개</span>
-      </div>
-      <div class="card">
         <div class="thumb"><img src="img/lumia-combat.jpg" alt="루미아 덱" style="object-position:center"></div>
         <b>루미아 덱</b>
         <span>카드 게임과 AI 플레이 테스트 도구</span>
@@ -58,20 +53,25 @@
         <b>카톡 AI 원격 비서</b>
         <span>카톡으로 집 PC의 AI에 일 시키기</span>
       </div>
+      <div class="card">
+        <div class="thumb"><img src="img/mv-island.jpg" alt="팬 뮤직비디오" style="object-position:center"></div>
+        <b>팬 뮤직비디오</b>
+        <span>React 코드로 만든 3분 32초 영상. YouTube 공개</span>
+      </div>
     </div>
   </section>
 
   <section class="skills">
     <p class="label">쓰는 기술</p>
     <dl class="kv">
-<dt>화면</dt><dd>TypeScript, React 19, Vite, TanStack Query, Tailwind CSS</dd>
-<dt>서버·DB</dt><dd>Node.js(Fastify), Prisma, MySQL 8, Python</dd>
-<dt>앱</dt><dd>Kotlin, Jetpack Compose, Room</dd>
-<dt>배포·운영</dt><dd>Cloudflare Pages·Tunnel·Workers, GitHub Actions, Windows 서버</dd>
-<dt>AI</dt><dd>LLM API, 도구 호출, MCP</dd>
-<dt>그 밖에</dt><dd>C#(Windows 도구, 게임 모드), Lua, Remotion, Three.js</dd>
+<dt>프론트엔드</dt><dd>TypeScript, React 19, Vite, TanStack Query, Tailwind CSS</dd>
+<dt>백엔드·DB</dt><dd>Node.js(Fastify), Prisma, MySQL 8, Python</dd>
+<dt>안드로이드</dt><dd>Kotlin, Jetpack Compose, Room, Hilt</dd>
+<dt>배포·운영</dt><dd>Cloudflare Pages·Tunnel·Workers·D1, GitHub Actions(CI), Git 훅, Windows 서버</dd>
+<dt>AI</dt><dd>LLM API, Tool Calling, RAG(SQLite FTS5), MCP, LightGBM</dd>
+<dt>그 밖에</dt><dd>C#(Windows 도구, 게임 모드), Skript, Java(간단한 플러그인), Lua, Remotion, Three.js</dd>
     </dl>
-    <p class="aside">개발에는 AI 코딩 도구(Claude Code, Codex)를 씁니다. 무엇을 만들지 정하고, 문제의 원인을 찾고, 결과가 맞는지 테스트와 실제 화면으로 확인하는 일은 직접 합니다.</p>
+    <p class="aside">코드 작성에는 Claude Code와 Codex를 씁니다. 무엇을 만들지 정하고, 문제의 원인을 찾고, 바뀐 코드의 범위를 따져 본 뒤 테스트하고 배포하는 일은 제가 합니다.</p>
   </section>
 </header>
 <section class="proj" id="ercraft">
@@ -106,9 +106,9 @@
   <ul class="points">
 <li><b>전적 검색</b><span>닉네임으로 시즌 전적과 최근 경기를 봅니다. 공식 API는 요청 한도가 있어서, 사용자가 누른 검색을 뒤에서 도는 수집 작업보다 먼저 처리합니다.</span></li>
 <li><b>플레이 분석</b><span>얼마나 오래 살아남는지, 싸움에서 얼마나 기여하는지 같은 여섯 항목을 비슷한 등급의 사용자와 비교해 등급으로 보여 줍니다.</span></li>
-<li><b>AI 분석과 챗봇</b><span>LLM이 전적을 읽고 코칭 글을 씁니다. 글 속 숫자는 원본 데이터와 대조한 뒤에 보여 줍니다. 챗봇은 질문에 맞는 전적을 조회해서 답합니다.</span></li>
-<li><b>조합 가이드, 순위표</b><span>어떤 캐릭터 3명이 팀을 이루면 성적이 좋은지, 요즘 어떤 캐릭터의 성적이 좋은지 실제 경기 기록을 집계해 보여 줍니다.</span></li>
-<li><b>미니게임</b><span>게임 상대를 찾는 대기 시간 동안 할 수 있는 체스, 오목, 카드 게임을 넣었습니다.</span></li>
+<li><b>AI 분석과 챗봇</b><span>LLM이 전적을 읽고 쓴 코칭 글은 숫자를 원본 데이터와 맞춰 본 뒤 내보냅니다. 챗봇은 그 사람의 전적이나, SQLite 전문 검색(FTS5)으로 찾은 공식 게임 데이터와 패치노트를 근거로 답합니다.</span></li>
+<li><b>조합 가이드, 순위표</b><span>성적이 좋은 3인 조합과 캐릭터를 경기 기록으로 집계해 보여 줍니다.</span></li>
+<li><b>점수 예측</b><span>지난 시즌 기록으로 학습한 LightGBM 모델이 시즌이 끝날 때의 랭크 점수를 범위(P10·P50·P90)로 예측합니다. 매시간 갱신하고, 같은 사람이 학습과 검증에 겹치지 않게 나눠 평가했습니다.</span></li>
   </ul>
 </section>
 <section class="proj flow" id="cases">
@@ -118,29 +118,25 @@
   <h4>"팀원 기록이 없다"는 문의에서 저장이 덜 된 경기를 찾아 고쳤습니다</h4>
   <p class="when">2026년 10월 · 사용자 문의 대응 · TypeScript, Prisma, MySQL</p>
   <dl>
-    <dt>문제</dt><dd>팀원 기록에 "공식 기록 없음"이 뜬다는 문의를 받았습니다. 확인해 보니 24명이 있어야 할 경기에 3명만 저장돼 있었습니다.</dd>
+    <dt>문제</dt><dd>팀원 기록에 "공식 기록 없음"이 뜬다는 문의를 받고 살펴보니, 24명이 있어야 할 경기에 3명만 저장돼 있었습니다.</dd>
     <dt>원인</dt><dd>경기가 끝나기 전에 받아 둔 기록이 완성된 기록으로 저장돼 있었습니다.</dd>
-    <dt>한 일</dt><dd>끝난 경기도 24명보다 적을 수 있어서, 완성 여부는 참가자 수가 아니라 1등 기록이 있는지로 판단하게 했습니다. 끝난 지 24시간이 안 된 미완성 경기는 다시 받습니다. 첫 수정 뒤에도 오래된 미완성 경기가 남아 있는 것을 확인하고, 40분 뒤에 한 번 더 고쳐 이미 저장된 경기도 다시 확인하게 했습니다.</dd>
-    <dt>결과</dt><dd>배포한 뒤 문의한 사용자의 경기 6개가 복구된 것을 확인했습니다. 원본을 다시 받을 수 없는 오래된 경기는 "기록 부족"으로 따로 표시합니다.</dd>
+    <dt>한 일</dt><dd>끝난 경기도 24명이 안 될 때가 있습니다. 그래서 참가자 수 대신 1등 기록이 있는지로 완성 여부를 가리고, 끝난 지 24시간이 안 된 미완성 경기는 다시 받습니다. 첫 수정 뒤에도 오래된 미완성 경기가 남아 있어, 40분 뒤에 한 번 더 고쳐 이미 저장된 경기도 다시 보게 했습니다.</dd>
+    <dt>결과</dt><dd>배포 후 문의한 사용자의 경기 6개가 복구됐습니다. 원본을 다시 받을 수 없는 오래된 경기는 화면에 "기록 부족"으로 표시합니다.</dd>
   </dl>
 </article>
 <article class="case">
   <h4>첫 검색이 느린 원인을 단계별로 재서 찾았습니다</h4>
   <p class="when">2026년 10월 · TypeScript, Node.js, Fastify, 공식 게임 API</p>
-  <dl>
-    <dt>문제</dt><dd>저장된 기록이 오래된 플레이어 한 명을 검색해 재 보니, 첫 화면이 뜨기까지 5.3초가 걸렸습니다.</dd>
-    <dt>원인</dt><dd>운영자용 진단 화면에서 단계별 시간을 보니, 저장된 기록이 이 플레이어의 것인지 확인하는 단계 하나가 4초였습니다. 공식 경기 목록을 매번 첫 페이지부터 읽고 있었습니다.</dd>
-    <dt>한 일</dt><dd>확인하는 방법은 바꾸지 않고, 경기 목록을 읽기 시작하는 위치만 저장된 최신 경기 다음으로 옮겼습니다. 거기서 못 찾으면 첫 페이지부터 다시 읽습니다.</dd>
-    <dt>결과</dt><dd>같은 플레이어로 다시 재니 1.75초로 줄었습니다.</dd>
-  </dl>
+  <p>저장된 기록이 오래된 플레이어 한 명을 검색해 재 보니, 첫 화면이 뜨기까지 5.3초가 걸렸습니다. 운영자용 진단 화면에서 단계별 시간을 보니, 저장된 기록이 지금 이 닉네임을 쓰는 사람의 것인지 확인하는 단계 하나가 4초였습니다. 공식 경기 목록을 매번 첫 페이지부터 읽고 있었습니다.</p>
+  <p>닉네임은 주인이 바뀔 수 있어서 이 확인을 건너뛸 수는 없었습니다. 공식 API의 다음 페이지 값이 경기 번호라는 것을 알아내, 저장된 최신 경기가 있는 자리부터 읽게 했습니다. 거기서 못 찾으면 첫 페이지부터 다시 읽습니다. 같은 플레이어로 다시 재니 1.75초로 줄었습니다.</p>
 </article>
 <article class="case">
   <h4>AI가 쓴 분석 문장의 숫자를 원본 데이터와 대조합니다</h4>
   <p class="when">2026년 9월 · TypeScript, LLM API</p>
   <dl>
-    <dt>문제</dt><dd>LLM은 승률이나 순위가 틀려도 자연스러운 문장을 씁니다. 전적 사이트에서 숫자가 틀리면 분석 전체를 믿을 수 없게 됩니다.</dd>
-    <dt>한 일</dt><dd>분석 글을 항목별로 나눠 쓰게 하고, 항목마다 근거로 쓴 데이터를 붙이게 했습니다. 검사기가 문장 속 숫자를 근거 값과 비교해, 다르면 그 항목만 다시 쓰게 합니다. 다시 써도 틀리면 화면에 내보내지 않습니다.</dd>
-    <dt>고친 점</dt><dd>처음에는 한 곳만 틀려도 글 전체를 다시 쓰게 했더니 맞던 항목까지 바뀌었습니다. 틀린 항목만 고치게 바꾸고, 고칠 때 근거 데이터는 바꾸지 못하게 막았습니다.</dd>
+    <dt>문제</dt><dd>서비스에 붙이기 전 시험에서 LLM이 서로 다른 패치를 섞어 말하고, 수치가 바뀐 방향을 거꾸로 쓴 적이 있습니다. 전적 분석은 숫자가 하나만 틀려도 글 전체를 믿기 어렵습니다.</dd>
+    <dt>처음</dt><dd>틀린 숫자가 한 곳만 있어도 글 전체를 다시 쓰게 했습니다. 그랬더니 맞던 항목까지 바뀌었습니다.</dd>
+    <dt>지금</dt><dd>분석 글을 항목별로 쓰게 하고, 항목마다 근거로 쓴 데이터를 붙이게 했습니다. 숫자가 근거와 다르면 그 항목만 다시 쓰고, 이때 근거 데이터는 바꾸지 못하게 막았습니다. 다시 써도 틀리면 화면에 내보내지 않습니다.</dd>
   </dl>
 </article>
 </section>
@@ -149,7 +145,7 @@
   <ul class="points">
 <li><b>삭제 요청 대응</b><span>"내 전적을 지워 달라"는 요청을 받고, 다음 날 검색·프로필·API·AI 분석에서 그 계정이 보이지 않게 하는 기능을 배포했습니다.</span></li>
 <li><b>게임사에 문의</b><span>경기 데이터 파일을 분석에 써도 되는지 게임 개발사에 문의해 허락을 받았습니다. 조건에 맞춰 원본 파일은 분석 뒤 지우고, 비공식 사이트라는 표시를 두었습니다.</span></li>
-<li><b>DB 관리</b><span>1분마다 도는 작업이 테이블 전체를 읽고 있어서 인덱스를 추가했습니다. 가장 큰 테이블은 서비스를 내리지 않고 압축해 38.95GB에서 16.3GB로 줄였습니다.</span></li>
+<li><b>DB 관리</b><span>PC 한 대에 DB와 작업 폴더가 같이 있어, 그대로 두면 4주쯤 뒤 디스크가 찰 상황이었습니다. 가장 큰 테이블을 서비스를 내리지 않고 압축해 38.95GB에서 16.3GB로 줄였습니다. 1분마다 테이블 전체를 읽던 조회에는 인덱스를 추가했습니다.</span></li>
 <li><b>게임 업데이트 알림</b><span>게임 데이터가 바뀌면 디스코드로 알림이 오게 해 두었습니다. 업데이트가 나오면 사이트 데이터를 언제 다시 만들지 바로 정할 수 있습니다.</span></li>
 <li><b>공지와 개발일지</b><span>기능을 바꾸면 사이트 공지에 달라진 점을 올리고, 개발일지에 무엇을 왜 고쳤는지 남깁니다.</span></li>
   </ul>
@@ -195,22 +191,13 @@
     <div><dt>기간</dt><dd>2026년 10월 – 현재</dd></div>
     <div><dt>공개</dt><dd>npm, PyPI · MIT 라이선스</dd></div>
     <div class="wide"><dt>기술</dt><dd>TypeScript, Python · GitHub Actions</dd></div>
-    <div class="wide"><dt>링크</dt><dd><a href="https://github.com/adgjmptw2/eternal-return-api">github.com/adgjmptw2/eternal-return-api</a></dd></div>
+    <div class="wide"><dt>링크</dt><dd><a href="https://github.com/adgjmptw2/eternal-return-api">github.com/adgjmptw2/eternal-return-api</a> · ERCraft는 비공개라 공개 코드는 여기 있습니다</dd></div>
   </dl>
   <div class="intro">
     <p>ERCraft를 만들면서 공식 API에서 여러 번 막혔습니다. 요청 한도, 한도를 넘었을 때의 재시도, 정상 응답 안에 들어 있는 오류 코드, 버전마다 바뀌는 항목 이름 같은 것들입니다. 이 부분을 처리한 코드를 떼어 내, 같은 API를 쓰는 다른 개발자도 쓸 수 있게 공개했습니다.</p>
-    <p>ERCraft는 비공개 저장소라서, 공개된 코드는 이 저장소에서 볼 수 있습니다.</p>
   </div>
 
-  <h3>들어 있는 것</h3>
-  <ul class="points">
-    <li><b>요청 관리</b><span>요청 속도 제한, 한도 초과 시 재시도, 응답 캐시</span></li>
-    <li><b>경기 받기</b><span>새로 생긴 경기만 이어 받기, 경기가 끝났는지 지켜보기</span></li>
-    <li><b>계산</b><span>참가자를 팀으로 묶기, 점수로 등급 계산, 공식 번역 파일로 이름 바꾸기</span></li>
-    <li><b>AI 도구 연결</b><span>AI 도구가 전적을 조회할 수 있는 MCP 서버</span></li>
-    <li><b>문서</b><span>실제 경기 30판으로 확인한 내용을 정리한 가이드. 공식 문서에 없는 동작을 적었습니다.</span></li>
-    <li><b>테스트</b><span>코드를 올릴 때마다 GitHub Actions가 Node 18, 20, 22, 24에서 테스트를 돌립니다.</span></li>
-  </ul>
+  <p>새로 생긴 경기만 이어 받기, 경기가 끝났는지 지켜보기, 참가자를 팀으로 묶기, 등급 계산도 들어 있고, AI 도구가 전적을 조회할 수 있는 MCP 서버도 있습니다. 공식 문서에 없는 동작은 실제 경기 30판으로 알아내 가이드에 적었습니다. 코드를 올릴 때마다 GitHub Actions가 Node 18, 20, 22, 24에서 테스트를 돌립니다.</p>
 
   <h3>고친 코드 한 곳: 팀 순위를 누구 기록에서 가져올까</h3>
   <p>한 경기의 참가자를 팀으로 묶는 함수입니다. 처음에는 팀 순위를 첫 번째 팀원의 기록에서 가져왔습니다. 실제 경기를 확인하다가, 게임을 중간에 포기한 사람의 기록에는 나간 시점의 순위(5위)가 남고 끝까지 한 팀원에게는 최종 순위(3위)가 남은 경기를 찾았습니다. 그래서 포기하지 않은 팀원 가운데 가장 오래 남은 사람을 기준으로 바꿨습니다.</p>
@@ -221,6 +208,16 @@ function stayScore(p: UserGame): [number, number] {
   return [p.giveUp === 1 ? 0 : 1, duration]
 }</pre>
   <p class="note"><a href="https://github.com/adgjmptw2/eternal-return-api/blob/main/src/teams.ts">src/teams.ts</a> · 입력 순서가 바뀌어도 같은 사람을 고르는지 확인하는 테스트를 함께 넣었습니다.</p>
+</section>
+<section class="proj flow" id="how">
+  <h3>AI 도구로 개발하는 방식</h3>
+  <p class="hint">AI 코딩 도구를 쓸 때 꼭 챙기는 것들입니다.</p>
+  <ul class="points">
+<li><b>바뀐 범위</b><span>시키지 않은 코드까지 바뀌는 일이 잦아서, 변경 내역에서 요청 범위를 벗어난 부분부터 봅니다.</span></li>
+<li><b>다른 모델에게 검토</b><span>중요한 변경은 여러 모델에게 검토시킵니다. 지적은 제가 먼저 보고 모델들에게 한 번 더 물어본 뒤 반영합니다. API 키가 다른 서버로 갈 수 있는 문제를 이렇게 찾아 고쳤습니다.</span></li>
+<li><b>받지 않은 제안</b><span>검토 의견을 다 받지는 않습니다. AI 분석을 처음부터 외국어로 만들자는 제안은 한국어 기준 숫자 검사를 건너뛰게 돼서 받지 않았습니다. 한국어로 만들어 검사한 뒤 번역합니다.</span></li>
+<li><b>배포 앞뒤</b><span>테스트를 돌려 새로 깨진 것이 없는지 보고, 테스트 서버에서 확인한 뒤 라이브 서버에 올립니다. 올린 뒤에는 문의받은 그 사례가 정말 고쳐졌는지 운영 화면과 API 응답을 열어 봅니다.</span></li>
+  </ul>
 </section>
 <section class="proj" id="diet">
   <div class="proj-head">
@@ -235,7 +232,7 @@ function stayScore(p: UserGame): [number, number] {
     <div class="wide"><dt>링크</dt><dd><a href="https://github.com/adgjmptw2/gabyeop">github.com/adgjmptw2/gabyeop</a> · 설치 파일(APK) 공개</dd></div>
   </dl>
   <div class="intro">
-    <p>다이어트를 하는 지인에게 만들어 준 앱입니다. 체중, 식단, 물, 단식, 걸음을 기록하고 목표까지 얼마나 왔는지 한 화면에서 보여 줍니다. 지인이 써 보고 말해 준 것을 받아 1.0에서 1.4까지 버전을 올렸습니다.</p>
+    <p>다이어트를 하는 지인에게 만들어 준 앱입니다. 체중, 식단, 물, 단식, 걸음을 기록하고 목표까지 얼마나 왔는지 한 화면에서 보여 줍니다. 지인이 써 보고 말해 준 것을 받아 1.0에서 1.4까지 버전을 올렸고, 달력의 칼로리 표시와 영양제 체크, 단식 그래프가 그렇게 들어갔습니다.</p>
   </div>
   <div class="phones">
     <figure><img src="img/diet-home.jpg" alt="홈 화면"><figcaption>홈</figcaption></figure>
@@ -246,19 +243,36 @@ function stayScore(p: UserGame): [number, number] {
 
   <h3>만들면서 신경 쓴 것</h3>
   <ul class="points">
-    <li><b>로그인 없이 바로 쓰기</b><span>처음에는 기록을 기기에만 저장합니다. 이때는 서버로 아무것도 보내지 않습니다.</span></li>
-    <li><b>Google 로그인과 동기화</b><span>로그인하면 서버에 백업하고 여러 기기에서 이어 씁니다. 두 기기에서 같은 기록을 고치면 더 최근에 고친 내용을 남깁니다.</span></li>
-    <li><b>인터넷 없이 음식 검색</b><span>식약처가 공개한 식품 33만 개를 앱에 넣어, 인터넷 없이도 이름으로 찾아 칼로리를 기록합니다.</span></li>
-    <li><b>업데이트해도 기록 유지</b><span>새 버전을 낼 때마다, 이전 버전에서 쓴 기록이 그대로 넘어오는지 확인한 뒤 전달했습니다.</span></li>
-    <li><b>써 본 사람의 요청 반영</b><span>달력에 그날 먹은 칼로리 표시, 영양제 체크, 단식 그래프 같은 요청을 다음 버전에 넣었습니다.</span></li>
-    <li><b>서버 비용</b><span>상시 켜 두는 서버 없이 Cloudflare 무료 범위 안에서 돌아가게 만들었습니다.</span></li>
+    <li><b>로그인은 선택</b><span>처음에는 기록을 기기에만 저장하고 서버로 아무것도 보내지 않습니다. Google로 로그인하면 여러 기기에서 이어 쓰고, 두 기기에서 같은 기록을 고치면 더 최근에 고친 쪽을 남깁니다.</span></li>
+    <li><b>업데이트</b><span>새 버전을 낼 때마다, 이전 버전에서 쓴 기록이 그대로 넘어오는지 보고 전달했습니다.</span></li>
+    <li><b>서버와 데이터</b><span>상시 켜 두는 서버 없이 Cloudflare 무료 범위 안에서 돌아갑니다. 식약처가 공개한 식품 33만 개를 앱에 넣어, 음식 검색은 인터넷 없이도 됩니다.</span></li>
   </ul>
 </section>
-<section class="proj" id="lumia">
+<section class="proj" id="mc">
+  <div class="proj-head">
+    <span class="kind">외주</span>
+    <h2>마인크래프트 서버 외주</h2>
+    <p class="sub">서버를 만들고 Skript와 플러그인을 붙이는 일</p>
+  </div>
+  <dl class="meta">
+    <div><dt>기간</dt><dd>2020년 – 현재</dd></div>
+    <div><dt>규모</dt><dd>서버 외주 5건 이상</dd></div>
+    <div class="wide"><dt>기술</dt><dd>Skript, 플러그인 설정, Java(직접 쓴 것은 간단한 플러그인)</dd></div>
+  </dl>
+  <div class="intro">
+    <p>Skript는 마인크래프트 서버에 기능을 넣는 스크립트 언어입니다. 이것저것 많이 만들었고 외주도 받아 했습니다. 군 복무 중에는 지인들끼리 하는 서버만 만들었습니다.</p>
+  </div>
+  <ul class="points">
+    <li><b>RPG 서버</b><span>의뢰를 받아 Skript와 플러그인 설정을 전부 맡았습니다. 그 뒤 같은 서버를 따로 사 간 사람이 두 명 더 있었고, 팔 때마다 여러 기능을 더해 넘겼습니다.</span></li>
+    <li><b>미니게임 4종</b><span>2026년 10월, Claude Code와 Codex로 Java 플러그인을 만들었습니다. 참가자는 명령어 없이 NPC와 버튼만 누르면 되고, 위치와 시간은 운영자가 게임 안 메뉴에서 바꿉니다. 서버가 꺼졌다 켜져도 이어서 진행됩니다.</span></li>
+    <li><b>모드팩 안내</b><span>2026년 11월, 모드팩 서버에 처음 온 사람이 따라갈 퀘스트 93개와 한글 번역 14,522줄을 만들었습니다. 번역은 LLM으로 하고, 검사에 걸린 줄은 영어로 남겼습니다.</span></li>
+  </ul>
+</section>
+<section class="proj flow" id="lumia">
   <div class="proj-head">
     <span class="kind">게임 · AI 테스트 도구</span>
     <h2>루미아 덱</h2>
-    <p class="sub">직접 만든 카드 게임과, AI가 그 게임을 끝까지 플레이하는 테스트 도구</p>
+    <p class="sub">웹 카드 게임과, AI가 한 판을 끝까지 플레이하는 테스트 도구</p>
   </div>
   <dl class="meta">
     <div><dt>기간</dt><dd>2026년 10월</dd></div>
@@ -275,47 +289,6 @@ function stayScore(p: UserGame): [number, number] {
     <figure><img src="img/lumia-combat.jpg" alt="루미아 덱 전투 화면"><figcaption>전투 화면. 그림은 게임 개발사가 팬 창작용으로 공개한 자료를 썼습니다.</figcaption></figure>
   </div>
 </section>
-<section class="proj flow" id="how">
-  <h3>AI 도구로 개발하는 방식</h3>
-  <p class="hint">AI 코딩 도구를 쓰면서 아래 일은 직접 합니다.</p>
-  <ul class="points">
-<li><b>바뀐 범위 확인</b><span>AI는 요청하지 않은 코드까지 바꾸는 일이 많습니다. 바뀐 내용에서 요청 범위를 벗어난 부분부터 봅니다.</span></li>
-<li><b>다른 모델에게 검토</b><span>중요한 변경은 코드를 쓴 모델과 다른 모델에게 한 번 더 검토를 맡깁니다. 라이브러리에서 경기를 놓칠 수 있는 문제와 API 키가 다른 서버로 갈 수 있는 문제를 이렇게 찾아 고쳤습니다.</span></li>
-<li><b>배포 전 테스트</b><span>테스트 전체를 돌려 새로 깨진 것이 없을 때만 배포합니다. 테스트 기록이 없으면 배포가 막히게 해 두었습니다.</span></li>
-<li><b>실제 화면에서 확인</b><span>배포한 뒤에는 문의받은 그 사례가 정말 고쳐졌는지 실제 화면과 API에서 확인합니다.</span></li>
-  </ul>
-</section>
-<section class="proj" id="mv">
-  <div class="proj-head">
-    <span class="kind">영상 · 코드로 만든 뮤직비디오</span>
-    <h2>이터널 리턴 팬 뮤직비디오</h2>
-    <p class="sub">영상 편집 도구 대신 React 코드로 만든 3분 32초짜리 영상</p>
-  </div>
-  <dl class="meta">
-    <div><dt>기간</dt><dd>2026년 11월</dd></div>
-    <div><dt>역할</dt><dd>개인 작업 · 구성, 개발</dd></div>
-    <div class="wide"><dt>기술</dt><dd>React, TypeScript, Remotion, Three.js · 1080p 60프레임</dd></div>
-    <div class="wide"><dt>영상</dt><dd><a href="https://youtu.be/91xJoBb_PfA">https://youtu.be/91xJoBb_PfA</a> (YouTube)</dd></div>
-  </dl>
-  <div class="intro">
-    <p>Remotion은 React 컴포넌트로 영상을 만드는 도구입니다. 장면 하나하나를 코드로 짰습니다. 게임 지도에서 섬 윤곽을 뽑아 3D로 세우고, 노래 가사가 나오는 시점에 맞춰 자막과 화면이 움직이게 했습니다.</p>
-    <p>내용은 3명이 한 팀으로 한 판을 치르는 과정입니다. 시간이 지날수록 활동할 수 있는 구역이 좁아지는 것처럼, 게임을 하는 사람이 봐도 어색하지 않게 실제 규칙에 맞춰 장면을 짰습니다.</p>
-  </div>
-  <div class="shots wide16">
-    <figure><img src="img/mv-console.jpg" alt="관측 화면 장면"></figure>
-    <figure><img src="img/mv-island.jpg" alt="3D 섬 장면"></figure>
-    <figure><img src="img/mv-pick.jpg" alt="캐릭터 선택 장면"></figure>
-    <figure><img src="img/mv-zone.jpg" alt="안전 구역 장면"></figure>
-  </div>
-  <h3>만든 방법</h3>
-  <ul class="points">
-    <li><b>장면</b><span>장면마다 React 컴포넌트 하나로 만들고, 몇 초에 무엇이 나올지 시간표로 이어 붙였습니다.</span></li>
-    <li><b>3D 섬</b><span>게임 지도 그림에서 섬과 지역 경계를 뽑아 Three.js로 입체로 세웠습니다.</span></li>
-    <li><b>자막</b><span>영어 가사를 단어마다 나오는 시각에 맞춰, 노래에 맞게 글자가 뜨게 했습니다.</span></li>
-    <li><b>게임 내용 확인</b><span>캐릭터 능력치, 스킬 이름, 화면에 나오는 안내 문구는 게임 데이터와 공식 번역 파일에서 확인해 넣었습니다.</span></li>
-  </ul>
-  <p class="note" style="margin-top:10px">수익을 내지 않는 팬 창작물입니다. 곡은 Mili의 world.execute(me);입니다. 캐릭터 그림은 게임 개발사가 팬 창작용으로 공개한 자료를 참고해 이미지 생성 AI로 만들었습니다.</p>
-</section>
 <section class="proj flow" id="works">
   <h3>그 밖에 만든 것</h3>
   <ul class="works">
@@ -325,7 +298,7 @@ function stayScore(p: UserGame): [number, number] {
     </li>
     <li>
       <div class="t"><b>게임 리썰 컴퍼니 모드 14개</b><span>C# · 2026년 3–6월 · <a href="https://thunderstore.io/c/lethal-company/p/MINE9289/">Thunderstore</a></span></div>
-      <p>처음 개발을 시작하며 만든 것들입니다. 한국어 번역 패치, 기존 모드를 고친 버전, 직접 만든 모드를 올렸고 모두 합쳐 10만 회 넘게 내려받았습니다.</p>
+      <p>한국어 번역 패치, 기존 모드를 고친 버전, 새로 만든 모드를 올렸고 모두 합쳐 10만 회 넘게 내려받았습니다.</p>
     </li>
     <li>
       <div class="t"><b>게임 좀보이드 서버 애드온</b><span>Lua · 2026년 10월 · <a href="https://github.com/adgjmptw2/sanboid-auto-story">GitHub</a></span></div>
@@ -336,6 +309,18 @@ function stayScore(p: UserGame): [number, number] {
       <p>음악 재생, 서버 코인, 모의투자 기능이 있는 개인 서버용 봇입니다.</p>
     </li>
   </ul>
+</section>
+<section class="proj flow" id="mvs">
+  <h3>이터널 리턴 팬 뮤직비디오</h3>
+  <p class="hint">React, TypeScript, Remotion, Three.js · 2026년 11월 · 3분 32초 · <a href="https://youtu.be/91xJoBb_PfA">https://youtu.be/91xJoBb_PfA</a></p>
+  <p>Remotion은 React 컴포넌트로 영상을 만드는 도구입니다. 게임 지도에서 섬과 지역 경계를 뽑아 Three.js로 입체로 세우고, 노래 가사가 나오는 시각에 맞춰 자막과 화면이 움직이게 했습니다.</p>
+  <div class="shots four">
+    <figure><img src="img/mv-console.jpg" alt="관측 화면 장면"></figure>
+    <figure><img src="img/mv-island.jpg" alt="3D 섬 장면"></figure>
+    <figure><img src="img/mv-pick.jpg" alt="캐릭터 선택 장면"></figure>
+    <figure><img src="img/mv-zone.jpg" alt="안전 구역 장면"></figure>
+  </div>
+  <p class="note" style="margin-top:10px">수익을 내지 않는 팬 창작물입니다. 곡은 Mili의 world.execute(me);입니다. 캐릭터 그림은 게임 개발사가 팬 창작용으로 공개한 자료를 참고해 이미지 생성 AI로 만들었습니다.</p>
 </section>
 <footer class="closing">
   <div class="c">

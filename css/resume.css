@@ -17,7 +17,7 @@ h1 { font-size: 30px; line-height: 1.2; font-weight: 800; letter-spacing: -0.03e
 .contact.links { margin-top: 2px; color: var(--ink); }
 .contact.links span { color: var(--muted); margin-right: 4px; }
 .intro { margin: 12px 0 0; padding: 10px 0 0; border-top: 2px solid var(--ink); font-size: 13.2px; line-height: 1.7; color: var(--ink); }
-h2 { font-size: 12.5px; font-weight: 750; letter-spacing: 0.04em; color: var(--accent); margin: 14px 0 2px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
+h2 { font-size: 12.5px; font-weight: 750; letter-spacing: 0.04em; color: var(--accent); margin: 11px 0 2px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
 article { padding: 7px 0 0; }
 .ph { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 h3 { font-size: 14.4px; font-weight: 750; color: var(--ink); margin: 0; letter-spacing: -0.01em; }
@@ -32,6 +32,6 @@ li::marker { color: #9aa0ab; }
 .kv.cols { grid-template-columns: 5.6em 1fr 5.6em 1fr; }
 .kv dt { color: var(--muted); }
 .kv dd { margin: 0; color: var(--ink); }
-.foot { margin: 12px 0 0; font-size: 11.4px; color: var(--muted); }
+.foot { margin: 9px 0 0; font-size: 11.4px; color: var(--muted); }
 @page { size: A4; margin: 12mm 15mm 11mm; }
 @media print { .sheet { max-width: none; padding: 0; } article, .kv { break-inside: avoid; } }

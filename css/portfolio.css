@@ -92,6 +92,8 @@ figcaption b { font-weight: 650; }
 .shots.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .shots.three figure img { aspect-ratio: 16 / 10; }
 .shots.wide16 figure img { aspect-ratio: 16 / 9; }
+.shots.four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+.shots.four figure img { aspect-ratio: 16 / 9; object-position: center; }
 .phones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
 .phones figure img { border-radius: 12px; }
 
@@ -145,6 +147,7 @@ pre.code { font-family: var(--mono); font-size: 12px; line-height: 1.6; backgrou
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .meta { grid-template-columns: 1fr; }
   .shots, .shots.three, .two, .two.even { grid-template-columns: 1fr; }
+  .shots.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .phones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .points li { grid-template-columns: 1fr; }
   .proj { margin-top: 56px; }
@@ -166,8 +169,11 @@ pre.code { font-family: var(--mono); font-size: 12px; line-height: 1.6; backgrou
   .closing { margin-top: 30px; break-inside: avoid; }
   h3 { margin-top: 24px; break-after: avoid; }
   .hint, .proj-head, .meta, .label, .intro { break-after: avoid; }
+  .two .intro { break-after: auto; }
   .case, figure, .card, .points li, .works li, pre.code, .arch-wrap { break-inside: avoid; }
-  #ops, #how, #works, #arch { break-inside: avoid; }
+  #ops, #how, #works, #arch, #mvs { break-inside: avoid; }
+  #mv .shots { gap: 10px 12px; margin-top: 12px; }
+  #mv .shots.wide16 figure img { aspect-ratio: 16 / 7.6; object-position: center; }
   .arch { min-width: 0; }
   pre.code { white-space: pre-wrap; font-size: 11px; }
 }
