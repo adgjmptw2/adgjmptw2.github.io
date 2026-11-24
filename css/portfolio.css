@@ -170,6 +170,8 @@ pre.code { font-family: var(--mono); font-size: 12px; line-height: 1.6; backgrou
   h3 { margin-top: 24px; break-after: avoid; }
   .hint, .proj-head, .meta, .label, .intro { break-after: avoid; }
   .two .intro { break-after: auto; }
+  #ercraft .intro { max-width: none; }
+  #ercraft .shot-main img { aspect-ratio: 16 / 8.3; }
   .case, figure, .card, .points li, .works li, pre.code, .arch-wrap { break-inside: avoid; }
   #ops, #how, #works, #arch, #mvs { break-inside: avoid; }
   #mv .shots { gap: 10px 12px; margin-top: 12px; }
